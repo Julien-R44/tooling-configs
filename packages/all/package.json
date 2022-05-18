@@ -10,27 +10,16 @@
     "index.js"
   ],
   "peerDependencies": {
-    "eslint": ">=7.4.0"
+    "eslint": ">=7.4.0",
+    "prettier": ">=2.0.0"
   },
   "dependencies": {
+    "@julr/eslint-config-prettier": "workspace:*",
     "@julr/eslint-config-react": "workspace:*",
-    "@julr/eslint-config-vue": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-html": "^6.2.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsonc": "^2.2.1",
-    "eslint-plugin-n": "^15.2.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
-    "eslint-plugin-vue": "^8.7.1",
-    "eslint-plugin-yml": "^0.14.0",
-    "jsonc-eslint-parser": "^2.1.0",
-    "yaml-eslint-parser": "^0.5.0"
+    "@julr/eslint-config-vue": "workspace:*"
   },
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^8.15.0"
   },
   "pnpm": {
     "peerDependencyRules": {

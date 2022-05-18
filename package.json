@@ -16,5 +16,22 @@
     "bumpp": "^7.1.1",
     "eslint": "^8.15.0",
     "typescript": "^4.6.4"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "typescript"
+      ]
+    }
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
   }
 }
