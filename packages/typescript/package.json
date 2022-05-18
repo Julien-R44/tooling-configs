@@ -1,0 +1,24 @@
+{
+  "name": "@julr/eslint-config-ts",
+  "version": "0.1.2",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.4.0",
+    "typescript": ">=3.9"
+  },
+  "dependencies": {
+    "@julr/eslint-config-basic": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  }
+}

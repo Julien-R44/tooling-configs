@@ -1,0 +1,22 @@
+{
+  "name": "@julr/eslint-config-vue",
+  "version": "0.1.2",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.4.0"
+  },
+  "dependencies": {
+    "@julr/eslint-config-ts": "workspace:*",
+    "eslint-plugin-vue": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
+  }
+}
