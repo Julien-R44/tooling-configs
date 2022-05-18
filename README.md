@@ -19,7 +19,7 @@ pnpm add -D eslint @julr/eslint-config
 
 OR ( preferable ) : 
 package.json
-```json
+```jsonc
 {
   // ...
   "eslintConfig": {
