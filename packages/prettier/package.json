@@ -1,0 +1,30 @@
+{
+  "name": "@julr/eslint-config-prettier",
+  "version": "0.2.1",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "lint": "eslint . --config=index.js"
+  },
+  "peerDependencies": {
+    "eslint": ">=7.4.0",
+    "prettier": ">=2.0.0"
+  },
+  "dependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
