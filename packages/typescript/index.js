@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const basic = require('@julr/eslint-config-basic')
 
 module.exports = {
@@ -22,10 +21,18 @@ module.exports = {
     '@typescript-eslint/type-annotation-spacing': ['error', {}],
     '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports', disallowTypeAnnotations: false }],
     '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-    '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
     '@typescript-eslint/prefer-ts-expect-error': 'error',
 
     // Override JS
+    "padding-line-between-statements": "off",
+    "@typescript-eslint/padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "interface"
+      }
+    ],
     'no-useless-constructor': 'off',
     'indent': 'off',
     '@typescript-eslint/indent': ['error', 2, {
@@ -114,6 +121,7 @@ module.exports = {
     // '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
 
     // off
+    '@typescript-eslint/consistent-indexed-object-style': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-member-accessibility': 'off',
@@ -126,5 +134,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/triple-slash-reference': 'off',
   },
 }

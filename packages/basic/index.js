@@ -4,17 +4,18 @@ module.exports = {
     browser: true,
     node: true,
   },
+  reportUnusedDisableDirectives: true,
   extends: [
     './standard',
     'plugin:import/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:jsonc/recommended-with-jsonc',
     'plugin:yml/standard',
-    'plugin:n/recommended',
     'plugin:markdown/recommended',
   ],
   ignorePatterns: [
     '*.min.*',
+    '*.d.ts',
     'CHANGELOG.md',
     'dist',
     'LICENSE*',
@@ -30,10 +31,7 @@ module.exports = {
     '!.vitepress',
     '!.vscode',
   ],
-  plugins: [
-    'html',
-    'unicorn',
-  ],
+  plugins: ['html', 'unicorn'],
   settings: {
     'import/resolver': {
       node: { extensions: ['.js', '.mjs'] },
@@ -71,33 +69,47 @@ module.exports = {
           {
             pathPattern: '^$',
             order: [
+              'publisher',
               'name',
+              'displayName',
               'type',
               'version',
               'private',
               'packageManager',
               'description',
-              'keywords',
-              'license',
               'author',
-              'repository',
+              'license',
               'funding',
+              'homepage',
+              'repository',
+              'bugs',
+              'keywords',
+              'categories',
+              'sideEffects',
+              'exports',
               'main',
               'module',
-              'types',
               'unpkg',
               'jsdelivr',
-              'exports',
-              'files',
+              'types',
+              'typesVersions',
               'bin',
-              'sideEffects',
+              'icon',
+              'files',
+              'engines',
+              'activationEvents',
+              'contributes',
               'scripts',
               'peerDependencies',
               'peerDependenciesMeta',
               'dependencies',
               'optionalDependencies',
               'devDependencies',
+              'pnpm',
+              'overrides',
+              'resolutions',
               'husky',
+              'simple-git-hooks',
               'lint-staged',
               'eslintConfig',
             ],
@@ -105,6 +117,10 @@ module.exports = {
           {
             pathPattern: '^(?:dev|peer|optional|bundled)?[Dd]ependencies$',
             order: { type: 'asc' },
+          },
+          {
+            pathPattern: '^exports.*$',
+            order: ['types', 'require', 'import'],
           },
         ],
       },
@@ -154,7 +170,14 @@ module.exports = {
   ],
   rules: {
     // import
-    'import/order': 'error',
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+      },
+    ],
+    'import/no-duplicates': ['error', { considerQueryString: true }],
+    'import/newline-after-import': 'error',
     'import/first': 'error',
     'import/no-mutable-exports': 'error',
     'import/no-unresolved': 'off',
@@ -180,12 +203,7 @@ module.exports = {
     'func-call-spacing': ['off', 'never'],
     'key-spacing': ['error', { beforeColon: false, afterColon: true }],
     'indent': ['error', 2, { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }],
-    'no-restricted-syntax': [
-      'error',
-      'DebuggerStatement',
-      'LabeledStatement',
-      'WithStatement',
-    ],
+    'no-restricted-syntax': ['error', 'DebuggerStatement', 'LabeledStatement', 'WithStatement'],
     'object-curly-spacing': ['error', 'always'],
     'no-return-await': 'off',
     'space-before-function-paren': [
@@ -222,23 +240,28 @@ module.exports = {
         avoidQuotes: true,
       },
     ],
+    'prefer-exponentiation-operator': 'error',
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
     'template-curly-spacing': 'error',
     'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
     'generator-star-spacing': 'off',
-    'spaced-comment': ['error', 'always', {
-      line: {
-        markers: ['/'],
-        exceptions: ['/', '#'],
+    'spaced-comment': [
+      'error',
+      'always',
+      {
+        line: {
+          markers: ['/'],
+          exceptions: ['/', '#'],
+        },
+        block: {
+          markers: ['!'],
+          exceptions: ['*'],
+          balanced: true,
+        },
       },
-      block: {
-        markers: ['!'],
-        exceptions: ['*'],
-        balanced: true,
-      },
-    }],
+    ],
 
     // best-practice
     'array-callback-return': 'error',
@@ -264,15 +287,13 @@ module.exports = {
     // Uppercase regex escapes
     'unicorn/escape-case': 'error',
     // Array.isArray instead of instanceof
-    'unicorn/no-array-instanceof': 'error',
+    'unicorn/no-instanceof-array': 'error',
     // Prevent deprecated `new Buffer()`
     'unicorn/no-new-buffer': 'error',
     // Keep regex literals safe!
     'unicorn/no-unsafe-regex': 'off',
     // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
     'unicorn/number-literal-case': 'error',
-    // ** instead of Math.pow()
-    'unicorn/prefer-exponentiation-operator': 'error',
     // includes over indexOf when checking for existence
     'unicorn/prefer-includes': 'error',
     // String methods startsWith/endsWith instead of more complicated stuff
@@ -287,6 +308,8 @@ module.exports = {
     'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
     'eslint-comments/disable-enable-pair': 'off',
     'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off',
+    'import/namespace': 'off',
     'n/no-callback-literal': 'off',
 
     'sort-imports': [
