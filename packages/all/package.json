@@ -19,7 +19,7 @@
     "@julr/eslint-config-vue": "workspace:*"
   },
   "devDependencies": {
-    "eslint": "^8.15.0"
+    "eslint": "^8.20.0"
   },
   "pnpm": {
     "peerDependencyRules": {
