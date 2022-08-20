@@ -2,9 +2,9 @@
   "name": "@julr/eslint-config-ts",
   "version": "0.3.1",
   "description": "",
-  "keywords": [],
-  "license": "MIT",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "license": "MIT",
+  "keywords": [],
   "main": "index.js",
   "files": [
     "index.js"
@@ -15,11 +15,11 @@
   },
   "dependencies": {
     "@julr/eslint-config-basic": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "^5.30.6",
-    "@typescript-eslint/parser": "^5.30.6"
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1"
   },
   "devDependencies": {
-    "eslint": "^8.20.0"
+    "eslint": "^8.22.0"
   },
   "publishConfig": {
     "access": "public"

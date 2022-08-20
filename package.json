@@ -4,9 +4,9 @@
   "private": true,
   "packageManager": "pnpm@7.0.0",
   "description": "ESLint config presets",
-  "keywords": [],
-  "license": "ISC",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "license": "ISC",
+  "keywords": [],
   "scripts": {
     "lint": "eslint .",
     "release": "bumpp package.json packages/*/package.json --commit \"chore(release): %s\" --push --tag && pnpm -r publish --access public"
@@ -14,13 +14,15 @@
   "devDependencies": {
     "@julr/eslint-config": "*",
     "bumpp": "^8.2.1",
-    "eslint": "^8.20.0",
+    "eslint": "^8.22.0",
     "typescript": "^4.7.4"
   },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "typescript"
+        "typescript",
+        "@babel/core",
+        "prettier"
       ]
     }
   },

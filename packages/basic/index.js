@@ -12,6 +12,7 @@ module.exports = {
     'plugin:jsonc/recommended-with-jsonc',
     'plugin:yml/standard',
     'plugin:markdown/recommended',
+    'plugin:sonarjs/recommended',
   ],
   ignorePatterns: [
     '*.min.*',
@@ -31,7 +32,7 @@ module.exports = {
     '!.vitepress',
     '!.vscode',
   ],
-  plugins: ['html', 'unicorn'],
+  plugins: ['html', 'unicorn', 'sonarjs', '@shopify'],
   settings: {
     'import/resolver': {
       node: { extensions: ['.js', '.mjs'] },
@@ -275,10 +276,10 @@ module.exports = {
     'no-multi-str': 'error',
     'no-with': 'error',
     'no-void': 'error',
-    'no-useless-escape': 'off',
+    'no-useless-escape': 'error',
     'vars-on-top': 'error',
     'require-await': 'off',
-    'no-return-assign': 'off',
+    'no-return-assign': 'error',
     'operator-linebreak': ['error', 'before'],
 
     // unicorns
@@ -311,6 +312,8 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/namespace': 'off',
     'n/no-callback-literal': 'off',
+    // Prefer early return over conditionals that englobes the whole function
+    '@shopify/prefer-early-return': ['error', { maximumStatements: 1 }],
 
     'sort-imports': [
       'error',
