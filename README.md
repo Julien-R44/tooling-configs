@@ -1,4 +1,6 @@
-# @julr/eslint-config
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/8337858/188330694-486f26d6-1588-4c82-aa72-e6f6fcecc300.png">
+</p>
 
 ## Usage
 
