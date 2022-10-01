@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@julr/eslint-config-prettier": "workspace:*",
-    "@julr/eslint-config-react": "workspace:*",
     "@julr/eslint-config-vue": "workspace:*"
   },
   "devDependencies": {
