@@ -1,4 +1,9 @@
-module.exports = {
+// @ts-check
+/* eslint-disable unicorn/prefer-module */
+
+const { defineConfig } = require('eslint-define-config')
+
+module.exports = defineConfig({
   env: {
     es6: true,
     browser: true,
@@ -7,12 +12,16 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   extends: [
     './standard',
+    'eslint:recommended',
     'plugin:import/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:jsonc/recommended-with-jsonc',
     'plugin:yml/standard',
     'plugin:markdown/recommended',
     'plugin:sonarjs/recommended',
+    'plugin:unicorn/recommended',
+    'plugin:n/recommended',
+    'plugin:promise/recommended',
   ],
   ignorePatterns: [
     '*.min.*',
@@ -24,7 +33,6 @@ module.exports = {
     'coverage',
     'public',
     'temp',
-    'packages-lock.json',
     'pnpm-lock.yaml',
     'yarn.lock',
     '__snapshots__',
@@ -39,28 +47,6 @@ module.exports = {
     },
   },
   overrides: [
-    {
-      files: ['*.json', '*.json5'],
-      parser: 'jsonc-eslint-parser',
-      rules: {
-        'jsonc/array-bracket-spacing': ['error', 'never'],
-        'jsonc/comma-dangle': ['error', 'never'],
-        'jsonc/comma-style': ['error', 'last'],
-        'jsonc/indent': ['error', 2],
-        'jsonc/key-spacing': ['error', { beforeColon: false, afterColon: true }],
-        'jsonc/no-octal-escape': 'error',
-        'jsonc/object-curly-newline': ['error', { multiline: true, consistent: true }],
-        'jsonc/object-curly-spacing': ['error', 'always'],
-        'jsonc/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
-      },
-    },
-    {
-      files: ['*.yaml', '*.yml'],
-      parser: 'yaml-eslint-parser',
-      rules: {
-        'spaced-comment': 'off',
-      },
-    },
     {
       files: ['package.json'],
       parser: 'jsonc-eslint-parser',
@@ -127,12 +113,6 @@ module.exports = {
       },
     },
     {
-      files: ['*.d.ts'],
-      rules: {
-        'import/no-duplicates': 'off',
-      },
-    },
-    {
       files: ['*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
@@ -148,6 +128,8 @@ module.exports = {
       files: ['*.test.ts', '*.test.js', '*.spec.ts', '*.spec.js'],
       rules: {
         'no-unused-expressions': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/prefer-ts-expect-error': 'off',
       },
     },
     {
@@ -158,7 +140,6 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-use-before-define': 'off',
         '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/comma-dangle': 'off',
         'import/no-unresolved': 'off',
         'no-alert': 'off',
         'no-console': 'off',
@@ -170,151 +151,41 @@ module.exports = {
     },
   ],
   rules: {
-    // import
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-      },
-    ],
-    'import/no-duplicates': ['error', { considerQueryString: true }],
-    'import/newline-after-import': 'error',
-    'import/first': 'error',
-    'import/no-mutable-exports': 'error',
-    'import/no-unresolved': 'off',
-    'import/no-absolute-path': 'off',
-
-    // Common
-    'semi': ['error', 'never'],
-    'quotes': ['error', 'single'],
-    'quote-props': ['error', 'consistent-as-needed'],
+    /**
+     * Base eslint - Possibles problems
+     */
     'no-unused-vars': 'warn',
-    'no-param-reassign': 'off',
-    'array-bracket-spacing': ['error', 'never'],
-    'brace-style': ['error', '1tbs'],
-    'block-spacing': ['error', 'always'],
-    'camelcase': 'off',
-    'comma-spacing': ['error', { before: false, after: true }],
-    'comma-style': ['error', 'last'],
-    'comma-dangle': ['error', 'always-multiline'],
     'no-constant-condition': 'warn',
     'no-debugger': 'error',
-    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-cond-assign': ['error', 'always'],
-    'func-call-spacing': ['off', 'never'],
-    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-    'indent': ['error', 2, { SwitchCase: 1, VariableDeclarator: 1, outerIIFEBody: 1 }],
-    'no-restricted-syntax': ['error', 'DebuggerStatement', 'LabeledStatement', 'WithStatement'],
-    'object-curly-spacing': ['error', 'always'],
-    'no-return-await': 'off',
-    'space-before-function-paren': [
-      'error',
-      {
-        anonymous: 'always',
-        named: 'never',
-        asyncArrow: 'always',
-      },
-    ],
-    'no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 1 }],
 
-    // es6
+    /**
+     * Base eslint - Suggestions
+     */
+    'camelcase': 'off',
+    // Can be conflicting with early-return pattern
+    'consistent-return': 'off',
+    'eqeqeq': ['error', 'smart'],
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-restricted-syntax': ['error', 'DebuggerStatement', 'LabeledStatement', 'WithStatement'],
+    // See https://github.com/eslint/eslint/issues/11878 for reasoning
+    'no-return-await': 'off',
     'no-var': 'error',
-    'prefer-const': [
-      'error',
-      {
-        destructuring: 'any',
-        ignoreReadBeforeAssign: true,
-      },
-    ],
-    'prefer-arrow-callback': [
-      'error',
-      {
-        allowNamedFunctions: false,
-        allowUnboundThis: true,
-      },
-    ],
-    'object-shorthand': [
-      'error',
-      'always',
-      {
-        ignoreConstructors: false,
-        avoidQuotes: true,
-      },
-    ],
+    'object-shorthand': ['error', 'always', { ignoreConstructors: false, avoidQuotes: true }],
+    'prefer-arrow-callback': ['error', { allowNamedFunctions: false, allowUnboundThis: true }],
+    'prefer-const': ['error', { destructuring: 'any', ignoreReadBeforeAssign: true }],
     'prefer-exponentiation-operator': 'error',
     'prefer-rest-params': 'error',
     'prefer-spread': 'error',
     'prefer-template': 'error',
-    'template-curly-spacing': 'error',
-    'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
-    'generator-star-spacing': 'off',
     'spaced-comment': [
       'error',
       'always',
       {
-        line: {
-          markers: ['/'],
-          exceptions: ['/', '#'],
-        },
-        block: {
-          markers: ['!'],
-          exceptions: ['*'],
-          balanced: true,
-        },
+        line: { markers: ['/'], exceptions: ['/', '#'] },
+        block: { markers: ['!'], exceptions: ['*'], balanced: true },
       },
     ],
-
-    // best-practice
-    'array-callback-return': 'error',
-    'block-scoped-var': 'error',
-    'consistent-return': 'off',
-    'complexity': ['off', 11],
-    'eqeqeq': ['error', 'smart'],
-    'no-alert': 'warn',
-    'no-case-declarations': 'error',
-    'no-multi-spaces': 'error',
-    'no-multi-str': 'error',
-    'no-with': 'error',
-    'no-void': 'error',
-    'no-useless-escape': 'error',
-    'vars-on-top': 'error',
-    'require-await': 'off',
-    'no-return-assign': 'error',
-    'operator-linebreak': ['error', 'before'],
-
-    // unicorns
-    // Pass error message when throwing errors
-    'unicorn/error-message': 'error',
-    // Uppercase regex escapes
-    'unicorn/escape-case': 'error',
-    // Array.isArray instead of instanceof
-    'unicorn/no-instanceof-array': 'error',
-    // Prevent deprecated `new Buffer()`
-    'unicorn/no-new-buffer': 'error',
-    // Keep regex literals safe!
-    'unicorn/no-unsafe-regex': 'off',
-    // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
-    'unicorn/number-literal-case': 'error',
-    // includes over indexOf when checking for existence
-    'unicorn/prefer-includes': 'error',
-    // String methods startsWith/endsWith instead of more complicated stuff
-    'unicorn/prefer-starts-ends-with': 'error',
-    // textContent instead of innerText
-    'unicorn/prefer-text-content': 'error',
-    // Enforce throwing type error when throwing error while checking typeof
-    'unicorn/prefer-type-error': 'error',
-    // Use new when throwing error
-    'unicorn/throw-new-error': 'error',
-
-    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
-    'eslint-comments/disable-enable-pair': 'off',
-    'import/no-named-as-default-member': 'off',
-    'import/no-named-as-default': 'off',
-    'import/namespace': 'off',
-    'n/no-callback-literal': 'off',
-    // Prefer early return over conditionals that englobes the whole function
-    '@shopify/prefer-early-return': ['error', { maximumStatements: 1 }],
-
     'sort-imports': [
       'error',
       {
@@ -326,8 +197,77 @@ module.exports = {
       },
     ],
 
-    // yml
+    /**
+     * Base eslint - Best practices
+     */
+    'array-callback-return': 'error',
+    'block-scoped-var': 'error',
+    'complexity': ['off', 11],
+    'no-alert': 'error',
+    'no-multi-str': 'error',
+    'no-with': 'error',
+    'no-void': 'error',
+    'no-useless-escape': 'error',
+    'vars-on-top': 'error',
+    'require-await': 'off',
+    'no-return-assign': 'error',
+    'no-constructor-return': 'error',
+    'no-duplicate-imports': 'error',
+    'no-self-compare': 'error',
+
+    /**
+     * Plugin:unicorn
+     */
+    'unicorn/error-message': 'error',
+    'unicorn/escape-case': 'error',
+    'unicorn/no-instanceof-array': 'error',
+    'unicorn/no-new-buffer': 'error',
+    'unicorn/no-unsafe-regex': 'off',
+    'unicorn/number-literal-case': 'error',
+    'unicorn/prefer-includes': 'error',
+    'unicorn/prefer-starts-ends-with': 'error',
+    'unicorn/prefer-text-content': 'error',
+    'unicorn/prefer-type-error': 'error',
+    'unicorn/throw-new-error': 'error',
+    'unicorn/filename-case': [
+      'error',
+      {
+        case: 'snakeCase',
+      },
+    ],
+
+    /**
+     * Plugin:import
+     */
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+      },
+    ],
+    'import/no-duplicates': ['error', { considerQueryString: true }],
+    'import/newline-after-import': 'error',
+    'import/first': 'error',
+    'import/no-mutable-exports': 'error',
+    'import/no-unresolved': 'off',
+    'import/no-named-as-default-member': 'off',
+    'import/no-named-as-default': 'off',
+    'import/namespace': 'off',
+
+    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+    'eslint-comments/disable-enable-pair': 'off',
+    'n/no-callback-literal': 'off',
+
+    /**
+     * Plugin:shopify
+     */
+    // Prefer early return over conditionals that englobes the whole function
+    '@shopify/prefer-early-return': ['error', { maximumStatements: 1 }],
+
+    /**
+     * Plugin:yml
+     */
     'yml/quotes': ['error', { prefer: 'single', avoidEscape: false }],
     'yml/no-empty-document': 'off',
   },
-}
+})
