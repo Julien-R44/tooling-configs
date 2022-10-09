@@ -12,15 +12,15 @@ importers:
       eslint: ^8.25.0
       typescript: ^4.8.4
     devDependencies:
-      '@julr/eslint-config': link:packages/all
-      '@julr/eslint-config-react': link:packages/react
-      '@julr/eslint-config-ts': link:packages/typescript
-      '@julr/eslint-config-vue': link:packages/vue
+      '@julr/eslint-config': link:packages/eslint-configs/all
+      '@julr/eslint-config-react': link:packages/eslint-configs/react
+      '@julr/eslint-config-ts': link:packages/eslint-configs/typescript
+      '@julr/eslint-config-vue': link:packages/eslint-configs/vue
       bumpp: 8.2.1
       eslint: 8.25.0
       typescript: 4.8.4
 
-  packages/all:
+  packages/eslint-configs/all:
     specifiers:
       '@julr/eslint-config-prettier': workspace:*
       '@julr/eslint-config-vue': workspace:*
@@ -33,7 +33,7 @@ importers:
     devDependencies:
       eslint: 8.25.0
 
-  packages/basic:
+  packages/eslint-configs/basic:
     specifiers:
       '@shopify/eslint-plugin': ^42.0.1
       eslint: ^8.25.0
@@ -70,7 +70,7 @@ importers:
     devDependencies:
       eslint: 8.25.0
 
-  packages/prettier:
+  packages/eslint-configs/prettier:
     specifiers:
       eslint: ^8.25.0
       eslint-config-prettier: ^8.5.0
@@ -85,7 +85,7 @@ importers:
     devDependencies:
       eslint: 8.25.0
 
-  packages/react:
+  packages/eslint-configs/react:
     specifiers:
       '@julr/eslint-config-ts': workspace:*
       eslint: ^8.25.0
@@ -102,7 +102,7 @@ importers:
       react: 18.2.0
       typescript: 4.8.4
 
-  packages/typescript:
+  packages/eslint-configs/typescript:
     specifiers:
       '@julr/eslint-config-basic': workspace:*
       '@typescript-eslint/eslint-plugin': ^5.39.0
@@ -117,7 +117,7 @@ importers:
     devDependencies:
       eslint: 8.25.0
 
-  packages/vue:
+  packages/eslint-configs/vue:
     specifiers:
       '@julr/eslint-config-ts': workspace:*
       eslint: ^8.25.0
@@ -129,6 +129,9 @@ importers:
       eslint-plugin-vue: 9.6.0_eslint@8.25.0
     devDependencies:
       eslint: 8.25.0
+
+  packages/prettier-config:
+    specifiers: {}
 
 packages:
 
