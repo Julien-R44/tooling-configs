@@ -147,6 +147,7 @@ module.exports = defineConfig({
         'no-undef': 'off',
         'no-unused-expressions': 'off',
         'no-unused-vars': 'off',
+        'unicorn/filename-case': 'off',
       },
     },
   ],
