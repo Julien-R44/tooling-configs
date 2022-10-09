@@ -1,5 +1,5 @@
 {
-  "name": "@julr/eslint-config-monorepo",
+  "name": "@julr/tooling-configs",
   "version": "1.0.0-beta.0",
   "private": true,
   "packageManager": "pnpm@7.0.0",
@@ -9,7 +9,7 @@
   "keywords": [],
   "scripts": {
     "lint": "eslint .",
-    "release": "bumpp package.json packages/*/package.json --commit \"chore(release): %s\" --push --tag && pnpm -r publish --access public"
+    "release": "bumpp package.json packages/**/*/package.json --commit \"chore(release): %s\" --push --tag && pnpm -r publish --access public"
   },
   "devDependencies": {
     "@julr/eslint-config": "workspace:*",
