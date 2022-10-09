@@ -1,6 +1,6 @@
 {
   "name": "@julr/eslint-config-prettier",
-  "version": "0.3.2",
+  "version": "1.0.0-beta.0",
   "description": "",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
   "license": "MIT",
