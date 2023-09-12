@@ -113,6 +113,14 @@ module.exports = defineConfig({
       },
     },
     {
+      files: ['*.yaml', '*.yml'],
+      parser: 'yaml-eslint-parser',
+      rules: {
+        'spaced-comment': 'off',
+        'unicorn/filename-case': 'off',
+      },
+    },
+    {
       files: ['*.js'],
       rules: {
         '@typescript-eslint/no-var-requires': 'off',

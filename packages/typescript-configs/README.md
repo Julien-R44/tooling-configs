@@ -14,7 +14,7 @@ pnpm add -D @julr/typescript-configs
 
 The base configuration file is `tsconfig.base.json`. It contains the common configuration for all projects. Enable all strictness options.
 
-```jsonc
+```json
 {
   "extends": "@julr/typescript-configs/tsconfig.base.json",
   "compilerOptions": {
@@ -25,7 +25,7 @@ The base configuration file is `tsconfig.base.json`. It contains the common conf
 
 ### Node project
 
-```jsonc
+```json
 {
   "extends": "@julr/typescript-configs/node-18-cjs.json",
   // Can also be `node-18-esm.json` for ESM project

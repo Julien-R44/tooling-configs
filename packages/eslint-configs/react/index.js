@@ -1,3 +1,4 @@
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
   extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended', '@julr/eslint-config-ts'],
   settings: {

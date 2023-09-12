@@ -23,7 +23,7 @@ Following presets are available :
 
 ### Config `.eslintrc`
 
-```jsonc
+```json
 // .eslintrc
 {
   "extends": "@julr"
@@ -51,7 +51,7 @@ For example:
 pnpm add --D @julr/prettier-config
 ```
 
-```jsonc
+```json
 // package.json
 {
   "prettier": "@julr/prettier-config"

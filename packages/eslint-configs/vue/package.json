@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@julr/eslint-config-ts": "workspace:*",
-    "eslint-define-config": "^1.7.0",
-    "eslint-plugin-vue": "^9.6.0"
+    "eslint-define-config": "^1.23.0",
+    "eslint-plugin-vue": "^9.17.0"
   },
   "devDependencies": {
     "eslint": "^8.25.0"

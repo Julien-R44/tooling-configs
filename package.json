@@ -16,18 +16,9 @@
     "@julr/eslint-config-react": "workspace:*",
     "@julr/eslint-config-ts": "workspace:*",
     "@julr/eslint-config-vue": "workspace:*",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.25.0",
-    "typescript": "^4.8.4"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "typescript",
-        "@babel/core",
-        "prettier"
-      ]
-    }
+    "bumpp": "^9.2.0",
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
   },
   "eslintConfig": {
     "extends": [
