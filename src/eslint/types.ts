@@ -7,6 +7,7 @@ export type ConfigItem = FlatESLintConfigItem & {
 export type Awaitable<T> = T | Promise<T>
 
 export type JulrOptions = {
+  enableGitIgnore?: boolean
   jsonc?: boolean
   prettier?: boolean
   vue?: boolean
