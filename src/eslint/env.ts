@@ -6,3 +6,5 @@ export const hasVue =
 
 export const hasUnocss =
   isPackageExists('unocss') || isPackageExists('@unocss/webpack') || isPackageExists('@unocss/nuxt')
+
+export const hasAdonisjs = isPackageExists('@adonisjs/core')

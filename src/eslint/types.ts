@@ -17,6 +17,13 @@ export type JulrOptions = {
   enableGitIgnore?: boolean
 
   /**
+   * Enable AdonisJS lint rules
+   *
+   * Enabled by default is Adonisjs is detected in dependencies
+   */
+  adonisjs?: boolean
+
+  /**
    * Enable JSONC lint rules
    * @default true
    */

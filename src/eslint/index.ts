@@ -7,12 +7,13 @@ import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
 import { unicorn } from './configs/unicorn.js'
 import { prettier } from './configs/prettier.js'
+import { adonisjs } from './configs/adonisjs.js'
 import { combine, interopDefault } from './utils.js'
 import { javascript } from './configs/javascript.js'
 import { typescript } from './configs/typescript.js'
 import { perfectionist } from './configs/perfectionist.js'
-import { hasTypeScript, hasUnocss, hasVue } from './env.js'
 import { sortPackageJson, sortTsconfig } from './configs/sort.js'
+import { hasAdonisjs, hasTypeScript, hasUnocss, hasVue } from './env.js'
 import type { Awaitable, ConfigItem, JulrOptions, UserConfigItem } from './types.js'
 
 export async function julr(
@@ -26,6 +27,7 @@ export async function julr(
     jsonc: enableJsonc = true,
     prettier: enablePrettier = true,
     unocss: enableUno = hasUnocss,
+    adonisjs: enableAdonisJs = hasAdonisjs,
   } = options
 
   const configs: Awaitable<ConfigItem[]>[] = []
@@ -61,6 +63,10 @@ export async function julr(
 
   if (enableJsonc) {
     configs.push(jsonc(), sortPackageJson(), sortTsconfig())
+  }
+
+  if (enableAdonisJs) {
+    configs.push(adonisjs())
   }
 
   if (enablePrettier) {
