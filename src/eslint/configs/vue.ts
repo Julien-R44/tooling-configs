@@ -35,6 +35,7 @@ export async function vue(): Promise<ConfigItem[]> {
         'vue/require-prop-types': 'off',
         'vue/require-default-prop': 'off',
         'vue/multi-word-component-names': 'off',
+        'vue/comment-directive': 'off',
 
         'vue/block-order': ['error', { order: [['script', 'template'], 'style'] }],
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],

@@ -24,16 +24,12 @@ export async function typescript(): Promise<ConfigItem[]> {
         ...pluginTs.configs['eslint-recommended']!.overrides![0]!.rules,
         ...pluginTs.configs['strict']!.rules,
 
-        // TS
         '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
         '@typescript-eslint/consistent-type-imports': [
           'error',
           { prefer: 'type-imports', disallowTypeAnnotations: false },
         ],
-        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         '@typescript-eslint/prefer-ts-expect-error': 'error',
-
-        // Override JS
         '@typescript-eslint/padding-line-between-statements': [
           'error',
           {
@@ -64,6 +60,7 @@ export async function typescript(): Promise<ConfigItem[]> {
         ],
 
         // off
+        '@typescript-eslint/consistent-type-definitions': 'off',
         '@typescript-eslint/consistent-indexed-object-style': 'off',
         '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',

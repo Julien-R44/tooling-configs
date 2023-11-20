@@ -1,8 +1,11 @@
+import type { Linter } from 'eslint'
 import type { FlatESLintConfigItem } from '@antfu/eslint-define-config'
 
 export type ConfigItem = FlatESLintConfigItem & {
   name?: string
 }
+
+export type UserConfigItem = ConfigItem | Linter.FlatConfig
 
 export type Awaitable<T> = T | Promise<T>
 

@@ -20,6 +20,9 @@ importers:
       '@unocss/eslint-config':
         specifier: ^0.57.6
         version: 0.57.6(eslint@8.54.0)(typescript@5.2.2)
+      '@unocss/eslint-plugin':
+        specifier: ^0.57.6
+        version: 0.57.6(eslint@8.54.0)(typescript@5.2.2)
       eslint-config-flat-gitignore:
         specifier: ^0.1.1
         version: 0.1.1

@@ -3,15 +3,14 @@ import { interopDefault } from '../utils.js'
 import type { ConfigItem } from '../types.js'
 
 export async function unocss(): Promise<ConfigItem[]> {
-  // @ts-expect-error missing types
-  const unoPlugin = await interopDefault(import('eslint-plugin-perfectionist'))
+  const unoPlugin = await interopDefault(import('@unocss/eslint-plugin'))
 
   return [
     {
       name: 'julr:unocss',
       ignores: GLOB_EXCLUDE,
       plugins: {
-        '@unocss': unoPlugin,
+        '@unocss': unoPlugin as any,
       },
       rules: {
         ...unoPlugin.configs.recommended.rules,

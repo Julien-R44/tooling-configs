@@ -2,20 +2,23 @@ import { vue } from './configs/vue.js'
 import { node } from './configs/node.js'
 import { jsonc } from './configs/jsonc.js'
 import { jsdoc } from './configs/jsdoc.js'
-import { interopDefault } from './utils.js'
 import { unocss } from './configs/unocss.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
 import { unicorn } from './configs/unicorn.js'
 import { prettier } from './configs/prettier.js'
+import { combine, interopDefault } from './utils.js'
 import { javascript } from './configs/javascript.js'
 import { typescript } from './configs/typescript.js'
 import { perfectionist } from './configs/perfectionist.js'
 import { hasTypeScript, hasUnocss, hasVue } from './env.js'
 import { sortPackageJson, sortTsconfig } from './configs/sort.js'
-import type { Awaitable, ConfigItem, JulrOptions } from './types.js'
+import type { Awaitable, ConfigItem, JulrOptions, UserConfigItem } from './types.js'
 
-export async function julr(options: JulrOptions = {}) {
+export async function julr(
+  options: JulrOptions = {},
+  ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
+) {
   const {
     enableGitIgnore = true,
     typescript: enableTypescript = hasTypeScript,
@@ -65,5 +68,5 @@ export async function julr(options: JulrOptions = {}) {
   }
 
   const resolved = await Promise.all(configs)
-  return resolved.flat()
+  return combine(...resolved, ...userConfigs)
 }
