@@ -1,4 +1,0 @@
-packages:
-  - 'packages/*'
-  - '!packages/eslint-config'
-  - 'packages/eslint-configs/*'

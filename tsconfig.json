@@ -1,26 +1,26 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-
   "compilerOptions": {
+    "target": "es2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "checkJs": true,
+
     /**
      * Strictness
      */
     "strict": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "importsNotUsedAsValues": "error",
-    "checkJs": true,
     "forceConsistentCasingInFileNames": true
   }
 }

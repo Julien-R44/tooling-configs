@@ -2,35 +2,38 @@
   <img src="https://user-images.githubusercontent.com/8337858/194765812-05e19fc8-3820-45c5-8d02-fd838d303200.png">
 </p>
 
+## Features
+
+- Designed to work with Prettier, Vue, Typescript, JSX, Node, AdonisJS out of the box
+- Lint json files ( TSConfig, package.json )
+- Super easy to use ( one line of code )
+- [ESLint flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+- Use .gitignore as ignore file
+
 ## Usage
+
+> [!IMPORTANT]
+> - This config is using the new [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+> - New/updated rules will not be considered as breaking changes. Only API changes will be considered as breaking changes.
 
 ### Install
 
 ```bash
-pnpm add -D eslint prettier @julr/eslint-config @julr/prettier-config
+pnpm add -D eslint prettier @julr/tooling-configs
 ```
 
-#### Available presets
+### Config `eslint.config.js`
 
-Following presets are available :
-
-- `@julr/eslint-config`: Includes all presets.
-- `@julr/eslint-config-basic`: Common rules for most projects.
-- `@julr/eslint-config-react`: Rules for React projects.
-- `@julr/eslint-config-typescript`: Rules for TypeScript projects.
-- `@julr/eslint-config-vue`: Rules for Vue projects.
-- `@julr/eslint-config-prettier`: Rules for Prettier.
-
-### Config `.eslintrc`
-
-```json
+```ts
 // .eslintrc
-{
-  "extends": "@julr"
-}
+import { julr } from '@julr/tooling-configs/eslint'
+
+export default await julr({
+  // Your config here
+})
 ```
 
-> You don't need `.eslintignore` normally as it has been provided by the preset.
+> You don't need `.eslintignore` as it has been provided by the preset.
 
 ### Add script for package.json
 
@@ -47,13 +50,9 @@ For example:
 
 ### Prettier
 
-```
-pnpm add --D @julr/prettier-config
-```
-
 ```json
 // package.json
 {
-  "prettier": "@julr/prettier-config"
+  "prettier": "@julr/prettier-config/prettier"
 }
 ```
