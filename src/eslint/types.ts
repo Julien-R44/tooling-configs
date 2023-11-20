@@ -64,7 +64,9 @@ export type JulrOptions = {
    *
    * Enabled by default if `typescript` is detected in dependencies
    */
-  typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions
+  typescript?:
+    | boolean
+    | ((OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions) & { typeAwareRules?: boolean })
 
   /**
    * Enable UnoCSS lint rules

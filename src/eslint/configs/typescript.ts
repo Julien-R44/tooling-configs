@@ -7,7 +7,8 @@ import type {
 } from '../types.js'
 
 export async function typescript(
-  options?: OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
+  options?: OptionsTypeScriptWithTypes &
+    OptionsTypeScriptParserOptions & { typeAwareRules?: boolean },
 ): Promise<ConfigItem[]> {
   const { parserOptions = {} } = options ?? {}
 
@@ -113,7 +114,7 @@ export async function typescript(
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
 
-        ...(tsconfigPath ? typeAwareRules : {}),
+        ...(tsconfigPath && options?.typeAwareRules ? typeAwareRules : {}),
       },
     },
   ]

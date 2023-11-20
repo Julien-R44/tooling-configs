@@ -16,6 +16,9 @@ import { sortPackageJson, sortTsconfig } from './configs/sort.js'
 import { hasAdonisjs, hasTypeScript, hasUnocss, hasVue } from './env.js'
 import type { Awaitable, ConfigItem, JulrOptions, UserConfigItem } from './types.js'
 
+export * from './configs/index.js'
+export { combine, interopDefault } from './utils.js'
+
 export async function julr(
   options: JulrOptions = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
