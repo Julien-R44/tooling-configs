@@ -57,6 +57,10 @@
     "typescript": "^5.2.2"
   },
   "prettier": "./src/prettier/index.json",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "release-it": {
     "git": {
       "commitMessage": "chore(release): ${version}",
