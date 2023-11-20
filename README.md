@@ -22,7 +22,7 @@
 pnpm add -D eslint prettier @julr/tooling-configs
 ```
 
-### Config `eslint.config.js`
+### Eslint
 
 ```ts
 // .eslintrc
@@ -51,8 +51,32 @@ For example:
 ### Prettier
 
 ```json
-// package.json
 {
   "prettier": "@julr/prettier-config/prettier"
+}
+```
+
+### Tsconfig
+
+Node ( ESM ) : 
+
+```json
+{
+  "extends": "@julr/tooling-configs/tsconfigs/tsconfig.node",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build"
+  }
+}
+```
+
+Vue : 
+```json
+{
+  "extends": "@julr/tooling-configs/tsconfigs/tsconfig.vue",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build"
+  }
 }
 ```
