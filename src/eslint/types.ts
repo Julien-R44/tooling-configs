@@ -1,4 +1,5 @@
 import type { Linter } from 'eslint'
+import type { ParserOptions } from '@typescript-eslint/parser'
 import type { FlatESLintConfigItem } from '@antfu/eslint-define-config'
 
 export type ConfigItem = FlatESLintConfigItem & {
@@ -8,6 +9,21 @@ export type ConfigItem = FlatESLintConfigItem & {
 export type UserConfigItem = ConfigItem | Linter.FlatConfig
 
 export type Awaitable<T> = T | Promise<T>
+
+export interface OptionsTypeScriptWithTypes {
+  /**
+   * When this options is provided, type aware rules will be enabled.
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
+  tsconfigPath?: string | string[]
+}
+
+export interface OptionsTypeScriptParserOptions {
+  /**
+   * Additional parser options for TypeScript.
+   */
+  parserOptions?: Partial<ParserOptions>
+}
 
 export type JulrOptions = {
   /**
@@ -48,7 +64,7 @@ export type JulrOptions = {
    *
    * Enabled by default if `typescript` is detected in dependencies
    */
-  typescript?: boolean
+  typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions
 
   /**
    * Enable UnoCSS lint rules

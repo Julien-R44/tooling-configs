@@ -50,7 +50,11 @@ export async function julr(
   )
 
   if (enableTypescript) {
-    configs.push(typescript())
+    configs.push(
+      typescript({
+        ...(typeof enableTypescript !== 'boolean' ? enableTypescript : {}),
+      }),
+    )
   }
 
   if (enableVue) {

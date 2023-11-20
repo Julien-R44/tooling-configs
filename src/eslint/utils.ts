@@ -7,12 +7,13 @@ export async function interopDefault<T>(
   return (resolved as any).default || resolved
 }
 
-/**
- * Combine array and non-array configs into a single array.
- */
 export async function combine(
   ...configs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const resolved = await Promise.all(configs)
   return resolved.flat()
+}
+
+export function toArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value]
 }

@@ -1,12 +1,44 @@
-import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
 import { GLOB_TS, GLOB_TSX } from '../globs.js'
+import { interopDefault, toArray } from '../utils.js'
+import type {
+  ConfigItem,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptWithTypes,
+} from '../types.js'
 
-export async function typescript(): Promise<ConfigItem[]> {
+export async function typescript(
+  options?: OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
+): Promise<ConfigItem[]> {
+  const { parserOptions = {} } = options ?? {}
+
+  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
+
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),
     interopDefault(import('@typescript-eslint/parser')),
   ] as const)
+
+  const typeAwareRules: ConfigItem['rules'] = {
+    'dot-notation': 'off',
+    'no-implied-eval': 'off',
+    'no-throw-literal': 'off',
+    '@typescript-eslint/await-thenable': 'error',
+    '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-for-in-array': 'error',
+    '@typescript-eslint/no-implied-eval': 'error',
+    '@typescript-eslint/no-misused-promises': 'error',
+    '@typescript-eslint/no-throw-literal': 'error',
+    '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+    '@typescript-eslint/no-unsafe-argument': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 'error',
+    '@typescript-eslint/no-unsafe-call': 'error',
+    '@typescript-eslint/no-unsafe-member-access': 'error',
+    '@typescript-eslint/no-unsafe-return': 'error',
+    '@typescript-eslint/restrict-plus-operands': 'error',
+    '@typescript-eslint/restrict-template-expressions': 'error',
+    '@typescript-eslint/unbound-method': 'error',
+  }
 
   return [
     {
@@ -16,6 +48,13 @@ export async function typescript(): Promise<ConfigItem[]> {
         parser: parserTs,
         parserOptions: {
           sourceType: 'module',
+          ...(tsconfigPath
+            ? {
+                project: tsconfigPath,
+                tsconfigRootDir: process.cwd(),
+              }
+            : {}),
+          ...(parserOptions as any),
         },
       },
       plugins: { '@typescript-eslint': pluginTs as any },
@@ -73,6 +112,8 @@ export async function typescript(): Promise<ConfigItem[]> {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
+
+        ...(tsconfigPath ? typeAwareRules : {}),
       },
     },
   ]
