@@ -1,4 +1,4 @@
-import { GLOB_TS, GLOB_TSX } from '../globs.js'
+import { GLOB_SRC } from '../globs.js'
 import { interopDefault, toArray } from '../utils.js'
 import type {
   ConfigItem,
@@ -8,9 +8,9 @@ import type {
 
 export async function typescript(
   options?: OptionsTypeScriptWithTypes &
-    OptionsTypeScriptParserOptions & { typeAwareRules?: boolean },
+    OptionsTypeScriptParserOptions & { typeAwareRules?: boolean; enableForVue?: boolean },
 ): Promise<ConfigItem[]> {
-  const { parserOptions = {} } = options ?? {}
+  const { parserOptions = {}, enableForVue = false } = options ?? {}
 
   const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
 
@@ -44,10 +44,11 @@ export async function typescript(
   return [
     {
       name: 'julr:typescript',
-      files: [GLOB_TS, GLOB_TSX],
+      files: [GLOB_SRC, enableForVue ? '**/*.vue' : undefined].filter(Boolean) as string[],
       languageOptions: {
         parser: parserTs,
         parserOptions: {
+          extraFileExtensions: enableForVue ? ['.vue'] : [],
           sourceType: 'module',
           ...(tsconfigPath
             ? {

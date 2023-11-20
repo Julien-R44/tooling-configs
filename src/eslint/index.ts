@@ -56,6 +56,7 @@ export async function julr(
     configs.push(
       typescript({
         ...(typeof enableTypescript !== 'boolean' ? enableTypescript : {}),
+        enableForVue: enableVue,
       }),
     )
   }
