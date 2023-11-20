@@ -1,5 +1,6 @@
 import { vue } from './configs/vue.js'
 import { jsonc } from './configs/jsonc.js'
+import { jsdoc } from './configs/jsdoc.js'
 import { interopDefault } from './utils.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
@@ -28,7 +29,7 @@ export async function julr(options: JulrOptions = {}) {
     configs.push(plugin())
   }
 
-  configs.push(ignores(), javascript(), perfectionist(), imports())
+  configs.push(ignores(), javascript(), perfectionist(), imports(), jsdoc())
 
   if (enableTypescript) {
     configs.push(typescript())
