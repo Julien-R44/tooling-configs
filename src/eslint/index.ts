@@ -2,13 +2,14 @@ import { vue } from './configs/vue.js'
 import { jsonc } from './configs/jsonc.js'
 import { jsdoc } from './configs/jsdoc.js'
 import { interopDefault } from './utils.js'
+import { unocss } from './configs/unocss.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
-import { hasTypeScript, hasVue } from './env.js'
 import { prettier } from './configs/prettier.js'
 import { javascript } from './configs/javascript.js'
 import { typescript } from './configs/typescript.js'
 import { perfectionist } from './configs/perfectionist.js'
+import { hasTypeScript, hasUnocss, hasVue } from './env.js'
 import { sortPackageJson, sortTsconfig } from './configs/sort.js'
 import type { Awaitable, ConfigItem, JulrOptions } from './types.js'
 
@@ -19,6 +20,7 @@ export async function julr(options: JulrOptions = {}) {
     vue: enableVue = hasVue,
     jsonc: enableJsonc = true,
     prettier: enablePrettier = true,
+    unocss: enableUno = hasUnocss,
   } = options
 
   const configs: Awaitable<ConfigItem[]>[] = []
@@ -37,6 +39,10 @@ export async function julr(options: JulrOptions = {}) {
 
   if (enableVue) {
     configs.push(vue())
+  }
+
+  if (enableUno) {
+    configs.push(unocss())
   }
 
   if (enableJsonc) {
