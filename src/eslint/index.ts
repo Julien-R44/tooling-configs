@@ -1,10 +1,12 @@
 import { vue } from './configs/vue.js'
+import { node } from './configs/node.js'
 import { jsonc } from './configs/jsonc.js'
 import { jsdoc } from './configs/jsdoc.js'
 import { interopDefault } from './utils.js'
 import { unocss } from './configs/unocss.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
+import { unicorn } from './configs/unicorn.js'
 import { prettier } from './configs/prettier.js'
 import { javascript } from './configs/javascript.js'
 import { typescript } from './configs/typescript.js'
@@ -31,7 +33,16 @@ export async function julr(options: JulrOptions = {}) {
     configs.push(plugin())
   }
 
-  configs.push(ignores(), javascript(), perfectionist(), imports(), jsdoc())
+  configs.push(
+    ignores(),
+    javascript(),
+    perfectionist(),
+    imports(),
+    jsdoc(),
+    unicorn(),
+    node(),
+    unicorn(),
+  )
 
   if (enableTypescript) {
     configs.push(typescript())
