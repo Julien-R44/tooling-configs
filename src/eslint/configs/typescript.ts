@@ -1,5 +1,5 @@
-import { GLOB_SRC } from '../globs.js'
 import { interopDefault, toArray } from '../utils.js'
+import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs.js'
 import type {
   ConfigItem,
   OptionsTypeScriptParserOptions,
@@ -43,6 +43,10 @@ export async function typescript(
 
   return [
     {
+      name: 'julr:typescript:setup',
+      plugins: { '@typescript-eslint': pluginTs as any },
+    },
+    {
       name: 'julr:typescript',
       files: [GLOB_SRC, enableForVue ? '**/*.vue' : undefined].filter(Boolean) as string[],
       languageOptions: {
@@ -59,18 +63,15 @@ export async function typescript(
           ...(parserOptions as any),
         },
       },
-      plugins: { '@typescript-eslint': pluginTs as any },
 
       rules: {
         ...pluginTs.configs['eslint-recommended']!.overrides![0]!.rules,
         ...pluginTs.configs['strict']!.rules,
 
-        '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
         '@typescript-eslint/consistent-type-imports': [
           'error',
           { prefer: 'type-imports', disallowTypeAnnotations: false },
         ],
-        '@typescript-eslint/prefer-ts-expect-error': 'error',
         '@typescript-eslint/padding-line-between-statements': [
           'error',
           {
@@ -79,31 +80,60 @@ export async function typescript(
             next: ['interface', 'type'],
           },
         ],
-        'no-useless-constructor': 'off',
-        'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-        'no-redeclare': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
-        'no-use-before-define': 'off',
         '@typescript-eslint/no-use-before-define': [
           'error',
           { functions: false, classes: false, variables: true },
         ],
+        '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+        '@typescript-eslint/prefer-ts-expect-error': 'error',
+        'no-useless-constructor': 'off',
+        'no-unused-vars': 'off',
+
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        'no-redeclare': 'off',
+
+        '@typescript-eslint/no-redeclare': 'error',
+        'no-use-before-define': 'off',
+
         'no-dupe-class-members': 'off',
         '@typescript-eslint/no-dupe-class-members': 'error',
+
         'no-loss-of-precision': 'off',
         '@typescript-eslint/no-loss-of-precision': 'error',
+
         'lines-between-class-members': 'off',
         '@typescript-eslint/lines-between-class-members': [
           'error',
           'always',
           { exceptAfterSingleLine: true },
         ],
+        '@typescript-eslint/naming-convention': [
+          'error',
+          {
+            selector: 'variable',
+            format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+          },
+          {
+            selector: 'typeLike',
+            format: ['PascalCase'],
+          },
+          {
+            selector: 'class',
+            format: ['PascalCase'],
+          },
+          {
+            selector: 'interface',
+            format: ['PascalCase'],
+            custom: {
+              regex: '^I[A-Z]',
+              match: false,
+            },
+          },
+        ],
 
-        // off
+        // Off
         '@typescript-eslint/consistent-type-definitions': 'off',
         '@typescript-eslint/consistent-indexed-object-style': 'off',
-        '@typescript-eslint/naming-convention': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/parameter-properties': 'off',
@@ -116,6 +146,15 @@ export async function typescript(
         '@typescript-eslint/triple-slash-reference': 'off',
 
         ...(tsconfigPath && options?.typeAwareRules ? typeAwareRules : {}),
+      },
+    },
+    {
+      files: [GLOB_TS, GLOB_TSX],
+      rules: {
+        '@typescript-eslint/explicit-member-accessibility': [
+          'error',
+          { accessibility: 'no-public' },
+        ],
       },
     },
   ]
