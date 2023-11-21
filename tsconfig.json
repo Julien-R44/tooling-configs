@@ -4,10 +4,6 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "checkJs": true,
-
-    /**
-     * Strictness
-     */
     "strict": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -21,6 +17,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "outDir": "dist",
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist"]
 }
