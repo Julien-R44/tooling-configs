@@ -19,7 +19,7 @@ export async function perfectionist(): Promise<ConfigItem[]> {
 
             'internal-pattern': ['@/**', '#*/**'],
             'groups': [
-              // import 'foo.js' or import 'foo.css'
+              // Import 'foo.js' or import 'foo.css'
               ['side-effect', 'side-effect-style'],
 
               // Packages and node
