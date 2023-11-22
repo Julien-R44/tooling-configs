@@ -157,5 +157,13 @@ export async function typescript(
         ],
       },
     },
+    {
+      files: ['**/*.{test,spec}.ts?(x)'],
+      name: 'julr:typescript:tests-overrides',
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/prefer-ts-expect-error': 'off',
+      },
+    },
   ]
 }
