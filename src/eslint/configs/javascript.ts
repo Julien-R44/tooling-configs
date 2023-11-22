@@ -26,7 +26,6 @@ export async function javascript(): Promise<ConfigItem[]> {
         'no-constant-condition': 'warn',
         'no-debugger': 'error',
         'no-cond-assign': ['error', 'always'],
-        'capitalized-comments': 'error',
         'no-array-constructor': 'error',
         'no-unreachable': 'error',
         'one-var': ['error', 'never'],
@@ -57,6 +56,17 @@ export async function javascript(): Promise<ConfigItem[]> {
         'valid-typeof': ['error', { requireStringLiterals: true }],
         'curly': ['error', 'all'],
         'yoda': 'error',
+        'capitalized-comments': [
+          'error',
+          'always',
+          {
+            line: {
+              ignorePattern: '.*',
+              ignoreInlineComments: true,
+              ignoreConsecutiveComments: true,
+            },
+          },
+        ],
       },
     },
   ]
