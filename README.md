@@ -52,7 +52,7 @@ For example:
 
 ```json
 {
-  "prettier": "@julr/prettier-config/prettier"
+  "prettier": "@julr/tooling-configs/prettier"
 }
 ```
 
