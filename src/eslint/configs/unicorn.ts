@@ -22,7 +22,6 @@ export async function unicorn(): Promise<ConfigItem[]> {
         'unicorn/no-new-array': 'error',
         'unicorn/no-new-buffer': 'error',
         'unicorn/no-useless-spread': 'error',
-        'unicorn/no-useless-undefined': 'error',
         'unicorn/number-literal-case': 'error',
         'unicorn/prefer-array-find': 'error',
         'unicorn/prefer-dom-node-text-content': 'error',
