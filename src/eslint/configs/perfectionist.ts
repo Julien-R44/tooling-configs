@@ -42,6 +42,8 @@ export async function perfectionist(): Promise<ConfigItem[]> {
             ],
           },
         ],
+
+        'perfectionist/sort-enums': ['error', { type: 'line-length', order: 'asc' }],
       },
     },
   ]
