@@ -1,6 +1,7 @@
 import type { Linter } from 'eslint'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { FlatESLintConfigItem } from '@antfu/eslint-define-config'
+import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 
 export type ConfigItem = FlatESLintConfigItem & {
   name?: string
@@ -30,7 +31,7 @@ export type JulrOptions = {
    * If enabled, all files specified in `.gitignore` will be ignored
    * by eslint
    */
-  enableGitIgnore?: boolean
+  enableGitIgnore?: boolean | FlatGitignoreOptions
 
   /**
    * Enable AdonisJS lint rules

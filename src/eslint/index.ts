@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs'
+
 import { vue } from './configs/vue.js'
 import { node } from './configs/node.js'
 import { jsonc } from './configs/jsonc.js'
@@ -37,8 +39,14 @@ export async function julr(
 
   if (enableGitIgnore) {
     const plugin = await interopDefault(import('eslint-config-flat-gitignore'))
-    // @ts-expect-error - ignore
-    configs.push(plugin())
+
+    if (typeof enableGitIgnore !== 'boolean') {
+      // @ts-expect-error - ignore
+      configs.push(plugin(enableGitIgnore))
+    } else if (existsSync('.gitignore')) {
+      // @ts-expect-error - ignore
+      configs.push(plugin())
+    }
   }
 
   configs.push(
