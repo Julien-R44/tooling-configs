@@ -59,7 +59,10 @@ export async function typescript(
                 project: tsconfigPath,
                 tsconfigRootDir: process.cwd(),
               }
-            : {}),
+            : {
+              // https://typescript-eslint.io/blog/parser-options-project-true/
+              project: true
+            }),
           ...(parserOptions as any),
         },
       },
@@ -145,7 +148,7 @@ export async function typescript(
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
 
-        ...(tsconfigPath && options?.typeAwareRules ? typeAwareRules : {}),
+        ...(options?.typeAwareRules ? typeAwareRules : {}),
       },
     },
     {
