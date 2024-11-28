@@ -8,6 +8,7 @@ import { unocss } from './configs/unocss.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
 import { unicorn } from './configs/unicorn.js'
+import { style } from './configs/stylistic.js'
 import { prettier } from './configs/prettier.js'
 import { adonisjs } from './configs/adonisjs.js'
 import { combine, interopDefault } from './utils.js'
@@ -58,6 +59,7 @@ export async function julr(
     unicorn(),
     node(),
     unicorn(),
+    style(),
   )
 
   if (enableTypescript) {

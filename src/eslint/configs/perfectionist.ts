@@ -2,7 +2,6 @@ import { interopDefault } from '../utils.js'
 import type { ConfigItem } from '../types.js'
 
 export async function perfectionist(): Promise<ConfigItem[]> {
-  // @ts-expect-error missing types
   const pluginPerfectionist = await interopDefault(import('eslint-plugin-perfectionist'))
 
   return [
@@ -14,11 +13,11 @@ export async function perfectionist(): Promise<ConfigItem[]> {
         'perfectionist/sort-imports': [
           'error',
           {
-            'type': 'line-length',
-            'order': 'asc',
+            type: 'line-length',
+            order: 'asc',
 
-            'internal-pattern': ['@/**', '#*/**'],
-            'groups': [
+            internalPattern: ['^@/.*', '^#.*/.*', '^~/.*'],
+            groups: [
               // Import 'foo.js' or import 'foo.css'
               ['side-effect', 'side-effect-style'],
 

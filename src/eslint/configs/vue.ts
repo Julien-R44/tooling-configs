@@ -4,7 +4,6 @@ import type { ConfigItem } from '../types.js'
 
 export async function vue(): Promise<ConfigItem[]> {
   const [pluginVue, parserVue] = await Promise.all([
-    // @ts-expect-error missing types
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),
   ] as const)

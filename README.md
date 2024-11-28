@@ -29,11 +29,27 @@ pnpm add -D eslint prettier @julr/tooling-configs
 import { julr } from '@julr/tooling-configs/eslint'
 
 export default await julr({
-  // Your config here
+  // Julr options configurations
+}, {
+  // Additional custom eslint configurations
+  rules: {
+    'no-console': 'off'
+  }
 })
 ```
 
 > You don't need `.eslintignore` as it has been provided by the preset.
+
+#### Inspector 
+
+Want to quickly inspect what rules are being used ?
+
+Run this command from your project root directory:
+
+```sh
+npx @eslint/config-inspector
+```
+
 
 ### Add script for package.json
 

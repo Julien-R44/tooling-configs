@@ -2,13 +2,13 @@ import { interopDefault } from '../utils.js'
 import type { ConfigItem } from '../types.js'
 
 export async function adonisjs(): Promise<ConfigItem[]> {
-  // @ts-expect-error missing types
   const adonisjsPlugin = await interopDefault(import('@adonisjs/eslint-plugin'))
 
   return [
     {
       name: 'julr:adonisjs',
       plugins: {
+        // @ts-expect-error tkt
         '@adonisjs': adonisjsPlugin,
       },
       rules: {

@@ -54,15 +54,15 @@ export async function typescript(
         parserOptions: {
           extraFileExtensions: enableForVue ? ['.vue'] : [],
           sourceType: 'module',
-          ...(tsconfigPath
+          ...(options?.typeAwareRules
             ? {
-                project: tsconfigPath,
+                projectService: {
+                  allowDefaultProject: ['./*.js'],
+                  defaultProject: tsconfigPath,
+                },
                 tsconfigRootDir: process.cwd(),
               }
-            : {
-              // https://typescript-eslint.io/blog/parser-options-project-true/
-              project: true
-            }),
+            : {}),
           ...(parserOptions as any),
         },
       },
@@ -74,14 +74,6 @@ export async function typescript(
         '@typescript-eslint/consistent-type-imports': [
           'error',
           { prefer: 'type-imports', disallowTypeAnnotations: false },
-        ],
-        '@typescript-eslint/padding-line-between-statements': [
-          'error',
-          {
-            blankLine: 'always',
-            prev: '*',
-            next: ['interface', 'type'],
-          },
         ],
         '@typescript-eslint/no-use-before-define': [
           'error',
@@ -104,12 +96,12 @@ export async function typescript(
         'no-loss-of-precision': 'off',
         '@typescript-eslint/no-loss-of-precision': 'error',
 
-        'lines-between-class-members': 'off',
-        '@typescript-eslint/lines-between-class-members': [
-          'error',
-          'always',
-          { exceptAfterSingleLine: true },
-        ],
+        // 'lines-between-class-members': 'off',
+        // '@typescript-eslint/lines-between-class-members': [
+        //   'error',
+        //   'always',
+        //   { exceptAfterSingleLine: true },
+        // ],
         '@typescript-eslint/naming-convention': [
           'error',
           {

@@ -14,11 +14,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useUnknownInCatchVariables": true,
-    "verbatimModuleSyntax": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
   "ts-node": {

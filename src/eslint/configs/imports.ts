@@ -6,6 +6,7 @@ export async function imports(): Promise<ConfigItem[]> {
     {
       name: 'julr:imports',
       plugins: {
+        // @ts-expect-error tkt
         import: pluginImport,
       },
 
@@ -15,7 +16,7 @@ export async function imports(): Promise<ConfigItem[]> {
         'import/no-duplicates': 'error',
         'import/no-named-default': 'error',
         'import/no-self-import': 'error',
-        'import/newline-after-import': 'error',
+        'import/newline-after-import': ['error', { count: 1 }],
       },
     },
   ]
