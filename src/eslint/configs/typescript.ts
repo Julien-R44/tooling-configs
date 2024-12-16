@@ -20,16 +20,12 @@ export async function typescript(
   ] as const)
 
   const typeAwareRules: ConfigItem['rules'] = {
-    'dot-notation': 'off',
-    'no-implied-eval': 'off',
-    'no-throw-literal': 'off',
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
     '@typescript-eslint/no-floating-promises': 'error',
     '@typescript-eslint/no-for-in-array': 'error',
     '@typescript-eslint/no-implied-eval': 'error',
     '@typescript-eslint/no-misused-promises': 'error',
-    '@typescript-eslint/no-throw-literal': 'error',
     '@typescript-eslint/no-unnecessary-type-assertion': 'error',
     '@typescript-eslint/no-unsafe-argument': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
