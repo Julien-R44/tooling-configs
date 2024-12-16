@@ -12,7 +12,7 @@ export async function typescript(
 ): Promise<ConfigItem[]> {
   const { parserOptions = {}, enableForVue = false } = options ?? {}
 
-  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
+  const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : undefined
 
   const [pluginTs, parserTs] = await Promise.all([
     interopDefault(import('@typescript-eslint/eslint-plugin')),
@@ -57,6 +57,12 @@ export async function typescript(
                   defaultProject: tsconfigPath,
                 },
                 tsconfigRootDir: process.cwd(),
+              }
+            : {}),
+          ...(options?.forceDecorators
+            ? {
+                emitDecoratorMetadata: true,
+                experimentalDecorators: true,
               }
             : {}),
           ...(parserOptions as any),

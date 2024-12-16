@@ -17,6 +17,14 @@ export interface OptionsTypeScriptWithTypes {
    * @see https://typescript-eslint.io/linting/typed-linting/
    */
   tsconfigPath?: string | string[]
+
+  /**
+   * Force the use of decorators. You should enable it when you use the "legacy" decorators of Typescript.
+   * Particularly useful under AdonisJS: if this rule is not activated then when an import is used by an `@inject`,
+   * typescript-eslint/consistent-type-imports would replace the import with a type import, which will break the
+   * dependency injection.
+   */
+  forceDecorators?: boolean
 }
 
 export interface OptionsTypeScriptParserOptions {
