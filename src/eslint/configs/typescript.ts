@@ -1,4 +1,4 @@
-import { interopDefault, toArray } from '../utils.js'
+import { interopDefault } from '../utils.js'
 import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs.js'
 import type {
   ConfigItem,
