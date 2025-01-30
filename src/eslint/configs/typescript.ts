@@ -81,12 +81,25 @@ export async function typescript(
           'error',
           { functions: false, classes: false, variables: true },
         ],
-        '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+        '@typescript-eslint/ban-ts-comment': [
+          'error',
+          { 'ts-ignore': 'allow-with-description', 'ts-nocheck': false },
+        ],
         '@typescript-eslint/prefer-ts-expect-error': 'error',
         'no-useless-constructor': 'off',
         'no-unused-vars': 'off',
-
-        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            args: 'all',
+            argsIgnorePattern: '^_',
+            caughtErrors: 'all',
+            caughtErrorsIgnorePattern: '^_',
+            destructuredArrayIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+            ignoreRestSiblings: true,
+          },
+        ],
         'no-redeclare': 'off',
 
         '@typescript-eslint/no-redeclare': 'error',
@@ -98,17 +111,12 @@ export async function typescript(
         'no-loss-of-precision': 'off',
         '@typescript-eslint/no-loss-of-precision': 'error',
 
-        // 'lines-between-class-members': 'off',
-        // '@typescript-eslint/lines-between-class-members': [
-        //   'error',
-        //   'always',
-        //   { exceptAfterSingleLine: true },
-        // ],
         '@typescript-eslint/naming-convention': [
           'error',
           {
             selector: 'variable',
             format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+            filter: { regex: '^_', match: false },
           },
           {
             selector: 'typeLike',
@@ -141,6 +149,9 @@ export async function typescript(
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-namespace': 'off',
         '@typescript-eslint/triple-slash-reference': 'off',
+        '@typescript-eslint/no-extraneous-class': 'off',
+        // Common pattern in AdonisJS
+        '@typescript-eslint/no-empty-object-type': 'off',
 
         ...(options?.typeAwareRules ? typeAwareRules : {}),
       },
