@@ -22,7 +22,10 @@ export async function javascript(): Promise<FlatConfigItem[]> {
 
       rules: {
         'prefer-const': 'error',
-        'no-unused-vars': 'warn',
+        'no-unused-vars': [
+          'error',
+          { ignoreRestSiblings: true, argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        ],
         'no-constant-condition': 'warn',
         'no-debugger': 'error',
         'no-cond-assign': ['error', 'always'],
