@@ -13,10 +13,7 @@
   "exports": {
     "./prettier": "./dist/src/prettier/index.json",
     "./tsconfigs/*": "./dist/src/tsconfigs/*.json",
-    "./eslint": {
-      "import": "./dist/eslint/index.js",
-      "require": "./dist/eslint/index.cjs"
-    }
+    "./eslint": "./dist/eslint/index.js"
   },
   "bin": "./dist/cli/index.js",
   "files": [
@@ -24,7 +21,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "build": "tsup --format esm,cjs --clean --dts",
+    "build": "tsup",
     "release": "pnpm build && release-it",
     "typecheck": "tsc --noEmit",
     "checks": "pnpm typecheck && pnpm lint"
