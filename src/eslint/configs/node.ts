@@ -1,7 +1,7 @@
 import { pluginNode } from '../plugins.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function node(): Promise<ConfigItem[]> {
+export async function node(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:node',

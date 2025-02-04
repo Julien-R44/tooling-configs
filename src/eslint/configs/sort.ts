@@ -1,6 +1,6 @@
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function sortPackageJson(): Promise<ConfigItem[]> {
+export async function sortPackageJson(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:sort-package-json',
@@ -85,7 +85,7 @@ export async function sortPackageJson(): Promise<ConfigItem[]> {
   ]
 }
 
-export async function sortTsconfig(): Promise<ConfigItem[]> {
+export async function sortTsconfig(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:sort-tsconfig',

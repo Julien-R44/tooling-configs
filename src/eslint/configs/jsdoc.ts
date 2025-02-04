@@ -1,7 +1,7 @@
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function jsdoc(): Promise<ConfigItem[]> {
+export async function jsdoc(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:jsdoc',

@@ -53,6 +53,24 @@ Run this command from your project root directory:
 npx @eslint/config-inspector
 ```
 
+#### Config Composer
+`julr()` returns a `FlatConfigComposer` object from [eslint-flat-config-utils](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
+
+```ts
+// eslint.config.js
+import julr from '@julr/tooling-configs/eslint'
+
+export default julr()
+  .prepend(
+    // some configs before the main config
+  )
+  // rename plugin prefixes
+  .renamePlugins({
+    'old-prefix': 'new-prefix',
+    // ...
+  })
+// ...
+```
 
 ### Add script for package.json
 

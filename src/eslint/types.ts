@@ -1,13 +1,18 @@
 import type { Linter } from 'eslint'
 import type { ParserOptions } from '@typescript-eslint/parser'
-import type { FlatESLintConfigItem } from '@antfu/eslint-define-config'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 
-export type ConfigItem = FlatESLintConfigItem & {
-  name?: string
+export type FlatConfigItem = Omit<Linter.Config<Linter.RulesRecord>, 'plugins'> & {
+  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+  /**
+   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   *
+   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   */
+  plugins?: Record<string, any>
 }
 
-export type UserConfigItem = ConfigItem | Linter.FlatConfig
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
 
 export type Awaitable<T> = T | Promise<T>
 

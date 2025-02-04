@@ -1,8 +1,8 @@
 import { GLOB_EXCLUDE } from '../globs.js'
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function unocss(): Promise<ConfigItem[]> {
+export async function unocss(): Promise<FlatConfigItem[]> {
   const unoPlugin = await interopDefault(import('@unocss/eslint-plugin'))
 
   return [

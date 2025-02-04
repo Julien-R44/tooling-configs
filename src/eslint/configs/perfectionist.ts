@@ -1,7 +1,7 @@
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function perfectionist(): Promise<ConfigItem[]> {
+export async function perfectionist(): Promise<FlatConfigItem[]> {
   const pluginPerfectionist = await interopDefault(import('eslint-plugin-perfectionist'))
 
   return [

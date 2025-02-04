@@ -1,8 +1,8 @@
 import { GLOB_VUE } from '../globs.js'
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function vue(): Promise<ConfigItem[]> {
+export async function vue(): Promise<FlatConfigItem[]> {
   const [pluginVue, parserVue] = await Promise.all([
     interopDefault(import('eslint-plugin-vue')),
     interopDefault(import('vue-eslint-parser')),

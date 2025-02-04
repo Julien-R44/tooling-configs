@@ -1,6 +1,6 @@
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function javascript(): Promise<ConfigItem[]> {
+export async function javascript(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:javascript',

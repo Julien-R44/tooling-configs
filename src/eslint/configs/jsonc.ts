@@ -1,8 +1,8 @@
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs.js'
 
-export async function jsonc(): Promise<ConfigItem[]> {
+export async function jsonc(): Promise<FlatConfigItem[]> {
   const [pluginJsonc, parserJsonc] = await Promise.all([
     interopDefault(import('eslint-plugin-jsonc')),
     interopDefault(import('jsonc-eslint-parser')),

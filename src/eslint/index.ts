@@ -1,9 +1,11 @@
 import { existsSync } from 'node:fs'
+import { FlatConfigComposer } from 'eslint-flat-config-utils'
 
 import { vue } from './configs/vue.js'
 import { node } from './configs/node.js'
 import { jsonc } from './configs/jsonc.js'
 import { jsdoc } from './configs/jsdoc.js'
+import { interopDefault } from './utils.js'
 import { unocss } from './configs/unocss.js'
 import { ignores } from './configs/ignores.js'
 import { imports } from './configs/imports.js'
@@ -11,21 +13,29 @@ import { unicorn } from './configs/unicorn.js'
 import { style } from './configs/stylistic.js'
 import { prettier } from './configs/prettier.js'
 import { adonisjs } from './configs/adonisjs.js'
-import { combine, interopDefault } from './utils.js'
 import { javascript } from './configs/javascript.js'
 import { typescript } from './configs/typescript.js'
 import { perfectionist } from './configs/perfectionist.js'
 import { sortPackageJson, sortTsconfig } from './configs/sort.js'
 import { hasAdonisjs, hasTypeScript, hasUnocss, hasVue } from './env.js'
-import type { Awaitable, ConfigItem, JulrOptions, UserConfigItem } from './types.js'
+import type { Awaitable, FlatConfigItem, JulrOptions, UserConfigItem } from './types.js'
 
 export * from './configs/index.js'
-export { combine, interopDefault } from './utils.js'
 
-export async function julr(
-  options: JulrOptions = {},
+const flatConfigProps = [
+  'name',
+  'languageOptions',
+  'linterOptions',
+  'processor',
+  'plugins',
+  'rules',
+  'settings',
+] satisfies (keyof FlatConfigItem)[]
+
+export function julr(
+  options: JulrOptions & Omit<FlatConfigItem, 'files'> = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
-) {
+): FlatConfigComposer<FlatConfigItem> {
   const {
     enableGitIgnore = true,
     typescript: enableTypescript = hasTypeScript,
@@ -36,22 +46,26 @@ export async function julr(
     adonisjs: enableAdonisJs = hasAdonisjs,
   } = options
 
-  const configs: Awaitable<ConfigItem[]>[] = []
+  const configs: Awaitable<FlatConfigItem[]>[] = []
 
   if (enableGitIgnore) {
-    const plugin = await interopDefault(import('eslint-config-flat-gitignore'))
-
     if (typeof enableGitIgnore !== 'boolean') {
-      // @ts-expect-error - ignore
-      configs.push(plugin(enableGitIgnore))
+      configs.push(
+        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
+          r({ name: 'julr:gitignore', ...enableGitIgnore }),
+        ]),
+      )
     } else if (existsSync('.gitignore')) {
-      // @ts-expect-error - ignore
-      configs.push(plugin())
+      configs.push(
+        interopDefault(import('eslint-config-flat-gitignore')).then((r) => [
+          r({ name: 'julr:gitignore', strict: false }),
+        ]),
+      )
     }
   }
 
   configs.push(
-    ignores(),
+    ignores(options.ignores),
     javascript(),
     perfectionist(),
     imports(),
@@ -91,6 +105,15 @@ export async function julr(
     configs.push(prettier())
   }
 
-  const resolved = await Promise.all(configs)
-  return combine(...resolved, ...userConfigs)
+  // User can optionally pass a flat config item to the first argument
+  // We pick the known keys as ESLint would do schema validation
+  const fusedConfig = flatConfigProps.reduce((acc, key) => {
+    if (key in options) acc[key] = options[key] as any
+    return acc
+  }, {} as FlatConfigItem)
+
+  if (Object.keys(fusedConfig).length) configs.push([fusedConfig])
+
+  const composer = new FlatConfigComposer()
+  return composer.append(...configs, ...userConfigs)
 }

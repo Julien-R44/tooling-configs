@@ -5,4 +5,5 @@ export default julr({
   typescript: {
     typeAwareRules: false,
   },
+  ignores: ['test.ts'],
 })

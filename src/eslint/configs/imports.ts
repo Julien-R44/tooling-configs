@@ -1,14 +1,11 @@
 import { pluginImport } from '../plugins.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function imports(): Promise<ConfigItem[]> {
+export async function imports(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:imports',
-      plugins: {
-        // @ts-expect-error tkt
-        import: pluginImport,
-      },
+      plugins: { import: pluginImport },
 
       rules: {
         'import/first': 'error',

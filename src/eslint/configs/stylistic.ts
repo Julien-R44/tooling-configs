@@ -1,16 +1,13 @@
 import { interopDefault } from '../utils.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function style(): Promise<ConfigItem[]> {
+export async function style(): Promise<FlatConfigItem[]> {
   const plugin = await interopDefault(import('@stylistic/eslint-plugin'))
 
   return [
     {
       name: 'julr:stylistic',
-      plugins: {
-        // @ts-expect-error tkt
-        '@stylistic': plugin,
-      },
+      plugins: { '@stylistic': plugin },
       rules: {
         '@stylistic/padding-line-between-statements': [
           'error',

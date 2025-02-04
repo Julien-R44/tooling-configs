@@ -1,7 +1,7 @@
 import { interopDefault } from '../utils.js'
 import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs.js'
 import type {
-  ConfigItem,
+  FlatConfigItem,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
 } from '../types.js'
@@ -9,7 +9,7 @@ import type {
 export async function typescript(
   options?: OptionsTypeScriptWithTypes &
     OptionsTypeScriptParserOptions & { typeAwareRules?: boolean; enableForVue?: boolean },
-): Promise<ConfigItem[]> {
+): Promise<FlatConfigItem[]> {
   const { parserOptions = {}, enableForVue = false } = options ?? {}
 
   const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : undefined
@@ -19,7 +19,7 @@ export async function typescript(
     interopDefault(import('@typescript-eslint/parser')),
   ] as const)
 
-  const typeAwareRules: ConfigItem['rules'] = {
+  const typeAwareRules: FlatConfigItem['rules'] = {
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/dot-notation': ['error', { allowKeywords: true }],
     '@typescript-eslint/no-floating-promises': 'error',

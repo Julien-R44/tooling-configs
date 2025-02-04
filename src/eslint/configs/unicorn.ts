@@ -1,7 +1,7 @@
 import { pluginUnicorn } from '../plugins.js'
-import type { ConfigItem } from '../types.js'
+import type { FlatConfigItem } from '../types.js'
 
-export async function unicorn(): Promise<ConfigItem[]> {
+export async function unicorn(): Promise<FlatConfigItem[]> {
   return [
     {
       name: 'julr:unicorn',
