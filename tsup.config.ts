@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: ['./src/eslint/index.ts', './src/cli/index.ts'],
-  dts: false,
+  dts: true,
   shims: true,
   clean: true,
   format: ['esm'],
