@@ -18,6 +18,7 @@
       "require": "./dist/index.cjs"
     }
   },
+  "bin": "./dist/cli/index.js",
   "files": [
     "dist"
   ],
@@ -25,10 +26,12 @@
     "lint": "eslint .",
     "build": "tsup --format esm,cjs --clean --dts",
     "release": "pnpm build && release-it",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "checks": "pnpm typecheck && pnpm lint"
   },
   "dependencies": {
     "@adonisjs/eslint-plugin": "2.0.0-beta.5",
+    "@clack/prompts": "^0.9.1",
     "@eslint/eslintrc": "^3.2.0",
     "@stylistic/eslint-plugin": "^3.0.1",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
@@ -46,6 +49,7 @@
     "eslint-plugin-vue": "^9.32.0",
     "jsonc-eslint-parser": "^2.4.0",
     "local-pkg": "^1.0.0",
+    "picocolors": "^1.1.1",
     "vue-eslint-parser": "^9.4.3"
   },
   "devDependencies": {

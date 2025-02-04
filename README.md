@@ -16,7 +16,15 @@
 > - This config is using the new [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
 > - New/updated rules will not be considered as breaking changes. Only API changes will be considered as breaking changes.
 
-### Install
+### CLI installation
+
+Just run this command in your project root directory:
+
+```bash
+pnpm dlx @julr/tooling-configs@latest
+```
+
+### Manual install
 
 ```bash
 pnpm add -D eslint prettier @julr/tooling-configs
@@ -30,11 +38,6 @@ import { julr } from '@julr/tooling-configs/eslint'
 
 export default await julr({
   // Julr options configurations
-}, {
-  // Additional custom eslint configurations
-  rules: {
-    'no-console': 'off'
-  }
 })
 ```
 

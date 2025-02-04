@@ -1,4 +1,4 @@
-import { julr } from './dist/index.js'
+import { julr } from './dist/eslint/index.js'
 
 export default julr({
   vue: true,
