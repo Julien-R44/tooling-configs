@@ -14,8 +14,8 @@
     "./prettier": "./dist/src/prettier/index.json",
     "./tsconfigs/*": "./dist/src/tsconfigs/*.json",
     "./eslint": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/eslint/index.js",
+      "require": "./dist/eslint/index.cjs"
     }
   },
   "bin": "./dist/cli/index.js",
