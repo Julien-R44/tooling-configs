@@ -3,11 +3,17 @@ import * as p from '@clack/prompts'
 import { readFile, writeFile } from 'node:fs/promises'
 
 import type { PromptResult } from './index.js'
-import pkgJson from '../../package.json' assert { type: 'json' }
+import pkgJson from '../../package.json' with { type: 'json' }
 
 export async function updatePkgJson(result: PromptResult) {
-  const cwd = process.cwd()
+  const needsToolingConfigs =
+    result.tools.includes('eslint') ||
+    result.tools.includes('prettier') ||
+    result.tools.includes('tsconfig')
 
+  if (!needsToolingConfigs) return
+
+  const cwd = process.cwd()
   const pathPackageJSON = join(cwd, 'package.json')
   const userPkgJson = JSON.parse(await readFile(pathPackageJSON, 'utf-8'))
 

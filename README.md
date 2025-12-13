@@ -107,7 +107,7 @@ Node ( ESM ) :
 }
 ```
 
-Vue : 
+Vue :
 ```json
 {
   "extends": "@julr/tooling-configs/tsconfigs/tsconfig.vue",
@@ -117,3 +117,12 @@ Vue :
   }
 }
 ```
+
+### OXC (oxlint + oxfmt)
+
+The CLI also supports setting up [OXC](https://oxc.rs/) tools as an alternative to ESLint and Prettier. This option will:
+
+- Create `.oxlintrc.json` and `.oxfmtrc.json` configuration files
+- Add `lint`, `lint:fix`, and `format` scripts to your package.json
+- Configure VS Code settings for OXC
+- Install `oxlint`, `oxfmt`, and `oxlint-tsgolint` packages

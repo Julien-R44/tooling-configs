@@ -4,6 +4,7 @@ import { intro, log, confirm, multiselect, isCancel, cancel } from '@clack/promp
 import { updatePkgJson } from './update_pkg.json.js'
 import { updateTsconfig } from './update_tsconfig.js'
 import { updateEslintFiles } from './update_eslint_files.js'
+import { updateOxc } from './update_oxc.js'
 
 function exit() {
   cancel('Cancelled')
@@ -11,7 +12,7 @@ function exit() {
 }
 
 export interface PromptResult {
-  tools: ('eslint' | 'prettier' | 'tsconfig')[]
+  tools: ('eslint' | 'prettier' | 'tsconfig' | 'oxc')[]
 }
 
 async function main() {
@@ -32,6 +33,7 @@ async function main() {
       { value: 'eslint', label: 'ESLint' },
       { value: 'prettier', label: 'Prettier' },
       { value: 'tsconfig', label: 'TypeScript' },
+      { value: 'oxc', label: 'OXC (oxlint + oxfmt)' },
     ],
     required: true,
   })
@@ -40,6 +42,7 @@ async function main() {
   await updatePkgJson({ tools })
   await updateEslintFiles({ tools })
   await updateTsconfig({ tools })
+  await updateOxc({ tools })
 
   log.success('All done. Make sure to install the dependencies with `pnpm install.')
 }

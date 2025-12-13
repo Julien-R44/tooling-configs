@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@adonisjs/eslint-plugin": "2.0.0-beta.5",
+    "@antfu/install-pkg": "^1.1.0",
     "@clack/prompts": "^0.9.1",
     "@stylistic/eslint-plugin": "^3.0.1",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
