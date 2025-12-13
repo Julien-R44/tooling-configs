@@ -107,6 +107,19 @@ Node ( ESM ) :
 }
 ```
 
+
+Node Next ( ESM + `ts` extensions ) : 
+
+```json
+{
+  "extends": "@julr/tooling-configs/tsconfigs/tsconfig.node-next",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build"
+  }
+}
+```
+
 Vue :
 ```json
 {

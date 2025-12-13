@@ -5,7 +5,9 @@
     "target": "ESNext",
     "lib": ["ESNext"],
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "module": "NodeNext",
+    "sourceMap": true,
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
