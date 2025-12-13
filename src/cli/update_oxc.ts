@@ -1,9 +1,8 @@
-import { existsSync } from 'node:fs'
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-
-import { installPackage } from '@antfu/install-pkg'
 import * as p from '@clack/prompts'
+import { existsSync } from 'node:fs'
+import { installPackage } from '@antfu/install-pkg'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 import type { PromptResult } from './index.js'
 
@@ -37,8 +36,8 @@ const vscodeSettings = {
 }
 
 const oxcScripts = {
-  format: 'oxfmt',
-  lint: 'oxlint',
+  'format': 'oxfmt',
+  'lint': 'oxlint',
   'lint:fix': 'oxlint --fix',
 }
 

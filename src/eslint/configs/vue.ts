@@ -25,10 +25,10 @@ export async function vue(): Promise<FlatConfigItem[]> {
       },
 
       rules: {
-        ...(pluginVue.configs.base.rules as any),
-        ...(pluginVue.configs['vue3-essential'].rules as any),
-        ...(pluginVue.configs['vue3-strongly-recommended'].rules as any),
-        ...(pluginVue.configs['vue3-recommended'].rules as any),
+        ...pluginVue.configs.base.rules,
+        ...pluginVue.configs['essential'].rules,
+        ...pluginVue.configs['strongly-recommended'].rules,
+        ...pluginVue.configs['recommended'].rules,
 
         'vue/no-v-html': 'off',
         'vue/require-prop-types': 'off',

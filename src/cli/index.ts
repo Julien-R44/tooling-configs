@@ -1,10 +1,10 @@
 import color from 'picocolors'
 import { intro, log, confirm, multiselect, isCancel, cancel } from '@clack/prompts'
 
+import { updateOxc } from './update_oxc.js'
 import { updatePkgJson } from './update_pkg.json.js'
 import { updateTsconfig } from './update_tsconfig.js'
 import { updateEslintFiles } from './update_eslint_files.js'
-import { updateOxc } from './update_oxc.js'
 
 function exit() {
   cancel('Cancelled')
