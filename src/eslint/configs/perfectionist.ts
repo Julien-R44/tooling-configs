@@ -22,22 +22,10 @@ export async function perfectionist(): Promise<FlatConfigItem[]> {
               ['side-effect', 'side-effect-style'],
 
               // Packages and node
-              ['builtin', 'external', 'builtin-type', 'external-type'],
+              ['builtin', 'external'],
 
               // Others
-              [
-                'internal-type',
-                'internal',
-                'parent-type',
-                'sibling-type',
-                'index-type',
-                'parent',
-                'sibling',
-                'index',
-                'style',
-                'object',
-                'unknown',
-              ],
+              ['internal', 'parent', 'sibling', 'index', 'style', 'unknown'],
             ],
           },
         ],
