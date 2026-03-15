@@ -133,9 +133,62 @@ Vue :
 
 ### OXC (oxlint + oxfmt)
 
-The CLI also supports setting up [OXC](https://oxc.rs/) tools as an alternative to ESLint and Prettier. This option will:
+Shared presets for [OXC](https://oxc.rs/) tools as an alternative to ESLint and Prettier.
 
-- Create `.oxlintrc.json` and `.oxfmtrc.json` configuration files
-- Add `lint`, `lint:fix`, and `format` scripts to your package.json
-- Configure VS Code settings for OXC
-- Install `oxlint`, `oxfmt`, and `oxlint-tsgolint` packages
+```bash
+pnpm add -D oxlint oxfmt @julr/tooling-configs
+```
+
+#### oxlint
+
+```ts
+// oxlint.config.ts
+import { defineConfig } from 'oxlint'
+import { julrPreset } from '@julr/tooling-configs/oxc/lint'
+
+export default defineConfig({
+  extends: [julrPreset()],
+})
+```
+
+Options:
+
+| Option          | Type      | Default | Description                             |
+| --------------- | --------- | ------- | --------------------------------------- |
+| `adonisjs`      | `boolean` | `false` | Enable AdonisJS-specific rules          |
+| `perfectionist` | `boolean` | `false` | Enable import sorting via perfectionist |
+
+```ts
+export default defineConfig({
+  extends: [julrPreset({ adonisjs: true, perfectionist: true })],
+})
+```
+
+#### oxfmt
+
+```ts
+// oxfmt.config.ts
+import { julrPreset } from '@julr/tooling-configs/oxc/fmt'
+
+export default julrPreset()
+```
+
+You can override any option:
+
+```ts
+export default julrPreset({ printWidth: 120, semi: true })
+```
+
+Defaults: `printWidth: 100`, `semi: false`, `singleQuote: true`, `trailingComma: 'all'`, `arrowParens: 'avoid'`.
+
+#### Scripts
+
+```json
+{
+  "scripts": {
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --write ."
+  }
+}
+```

@@ -3,17 +3,24 @@
   "type": "module",
   "version": "6.0.0",
   "packageManager": "pnpm@10.29.3",
-  "description": "ESLint config presets",
+  "description": "Shared tooling configs: ESLint, Prettier, TSConfig, OXC (oxlint + oxfmt)",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
   "license": "MIT",
   "keywords": [
     "eslint-config",
-    "flat"
+    "flat",
+    "oxlint",
+    "oxfmt",
+    "oxc",
+    "prettier",
+    "tsconfig"
   ],
   "exports": {
     "./prettier": "./dist/src/prettier/index.json",
     "./tsconfigs/*": "./dist/src/tsconfigs/*.json",
-    "./eslint": "./dist/eslint/index.js"
+    "./eslint": "./dist/eslint/index.js",
+    "./oxc/lint": "./dist/oxc/lint.js",
+    "./oxc/fmt": "./dist/oxc/fmt.js"
   },
   "bin": "./dist/cli/index.js",
   "files": [
@@ -49,18 +56,31 @@
     "picocolors": "^1.1.1",
     "vue-eslint-parser": "^10.4.0"
   },
+  "peerDependencies": {
+    "oxfmt": ">=0.40.0",
+    "oxlint": ">=1.55.0"
+  },
+  "peerDependenciesMeta": {
+    "oxfmt": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.2.3",
     "cpy": "^13.2.1",
     "eslint": "^10.0.0",
     "eslint-flat-config-utils": "^3.0.1",
+    "oxfmt": "^0.40.0",
+    "oxlint": "^1.55.0",
     "prettier": "^3.8.1",
     "release-it": "^19.2.4",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
-  "prettier": "./src/prettier/index.json",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
