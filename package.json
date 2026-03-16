@@ -12,7 +12,7 @@
   "author": "Julien Ripouteau <julien@ripouteau.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/julr/tooling-configs"
+    "url": "https://github.com/Julien-R44/tooling-configs"
   },
   "bin": "./dist/cli/index.mjs",
   "files": [
