@@ -69,6 +69,7 @@
     }
   },
   "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.6",
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.2.3",
     "eslint": "^10.0.0",
@@ -82,16 +83,30 @@
   },
   "publishConfig": {
     "access": "public",
-    "tag": "latest"
+    "provenance": true
   },
   "release-it": {
     "git": {
+      "requireCleanWorkingDir": true,
+      "requireUpstream": true,
       "commitMessage": "chore(release): ${version}",
-      "tagAnnotation": "release ${version}"
+      "tagAnnotation": "v${version}",
+      "push": true,
+      "tagName": "v${version}"
     },
     "github": {
-      "release": true,
-      "web": true
+      "release": true
+    },
+    "npm": {
+      "publish": true,
+      "skipChecks": true
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": {
+          "name": "angular"
+        }
+      }
     }
   }
 }
