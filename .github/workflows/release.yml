@@ -31,10 +31,12 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
-      - run: npm install -g npm@latest
+      - run: corepack enable && npm install -g npm@11
+        env:
+          COREPACK_ENABLE_STRICT: 0
 
       - run: pnpm install
 
-      - run: pnpm release -- --ci
+      - run: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

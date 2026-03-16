@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import color from 'picocolors'
 import { intro, log, confirm, multiselect, isCancel, cancel } from '@clack/prompts'
 
