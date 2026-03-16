@@ -1,6 +1,6 @@
 import { defineConfig } from 'oxfmt'
 
-import { IGNORE_PATTERNS } from './shared.js'
+import { IGNORE_PATTERNS } from './shared.ts'
 
 type OxfmtOptions = Partial<Parameters<typeof defineConfig>[0]>
 

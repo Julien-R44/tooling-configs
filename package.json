@@ -1,26 +1,29 @@
 {
   "name": "@julr/tooling-configs",
-  "type": "module",
   "version": "6.0.0",
-  "packageManager": "pnpm@10.29.3",
   "description": "Shared tooling configs: TSConfig, OXC (oxlint + oxfmt)",
-  "author": "Julien Ripouteau <julien@ripouteau.com>",
-  "license": "MIT",
   "keywords": [
-    "oxlint",
-    "oxfmt",
     "oxc",
+    "oxfmt",
+    "oxlint",
     "tsconfig"
   ],
+  "license": "MIT",
+  "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "bin": "./dist/cli/index.mjs",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     "./tsconfigs/*": "./dist/tsconfigs/*.json",
     "./oxc/lint": "./dist/oxc/lint.mjs",
     "./oxc/fmt": "./dist/oxc/fmt.mjs"
   },
-  "bin": "./dist/cli/index.mjs",
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "scripts": {
     "lint": "oxlint",
     "format": "oxfmt --write .",
@@ -36,6 +39,15 @@
     "eslint-plugin-perfectionist": "^5.5.0",
     "picocolors": "^1.1.1"
   },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "^10.0.6",
+    "@types/node": "^25.2.3",
+    "oxfmt": "^0.40.0",
+    "oxlint": "^1.55.0",
+    "release-it": "^19.2.4",
+    "tsdown": "^0.21.3",
+    "typescript": "^5.9.3"
+  },
   "peerDependencies": {
     "oxfmt": ">=0.40.0",
     "oxlint": ">=1.55.0"
@@ -48,19 +60,7 @@
       "optional": true
     }
   },
-  "devDependencies": {
-    "@release-it/conventional-changelog": "^10.0.6",
-    "@types/node": "^25.2.3",
-    "oxfmt": "^0.40.0",
-    "oxlint": "^1.55.0",
-    "release-it": "^19.2.4",
-    "tsdown": "^0.21.3",
-    "typescript": "^5.9.3"
-  },
-  "publishConfig": {
-    "access": "public",
-    "provenance": true
-  },
+  "packageManager": "pnpm@10.29.3",
   "release-it": {
     "git": {
       "requireCleanWorkingDir": true,

@@ -1,7 +1,7 @@
-import type { OxlintConfig } from 'oxlint'
 import { defineConfig } from 'oxlint'
+import type { OxlintConfig } from 'oxlint'
 
-import { IGNORE_PATTERNS } from './shared.js'
+import { IGNORE_PATTERNS } from './shared.ts'
 
 interface JulrOxlintConfig {
   adonisjs?: boolean
