@@ -16,19 +16,19 @@
     "tsconfig"
   ],
   "exports": {
-    "./prettier": "./dist/src/prettier/index.json",
-    "./tsconfigs/*": "./dist/src/tsconfigs/*.json",
-    "./eslint": "./dist/eslint/index.js",
-    "./oxc/lint": "./dist/oxc/lint.js",
-    "./oxc/fmt": "./dist/oxc/fmt.js"
+    "./prettier": "./dist/index.json",
+    "./tsconfigs/*": "./dist/tsconfigs/*.json",
+    "./eslint": "./dist/eslint/index.mjs",
+    "./oxc/lint": "./dist/oxc/lint.mjs",
+    "./oxc/fmt": "./dist/oxc/fmt.mjs"
   },
-  "bin": "./dist/cli/index.js",
+  "bin": "./dist/cli/index.mjs",
   "files": [
     "dist"
   ],
   "scripts": {
     "lint": "eslint .",
-    "build": "tsup",
+    "build": "tsdown",
     "release": "pnpm build && release-it",
     "typecheck": "tsc --noEmit",
     "checks": "pnpm typecheck && pnpm lint"
@@ -71,14 +71,13 @@
   "devDependencies": {
     "@types/eslint": "^9.6.1",
     "@types/node": "^25.2.3",
-    "cpy": "^13.2.1",
     "eslint": "^10.0.0",
     "eslint-flat-config-utils": "^3.0.1",
     "oxfmt": "^0.40.0",
     "oxlint": "^1.55.0",
     "prettier": "^3.8.1",
     "release-it": "^19.2.4",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.21.3",
     "typescript": "^5.9.3"
   },
   "publishConfig": {
