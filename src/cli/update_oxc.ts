@@ -6,28 +6,18 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 import type { PromptResult } from './index.js'
 
-const oxfmtConfig = {
-  $schema: './node_modules/oxfmt/configuration_schema.json',
-  experimentalSortImports: {
-    order: 'desc',
-  },
-  trailingComma: 'all',
-  semi: false,
-  singleQuote: true,
-  quoteProps: 'as-needed',
-  bracketSpacing: true,
-  arrowParens: 'always',
-  printWidth: 100,
-  ignorePatterns: ['.adonisjs/**', 'node_modules/**', 'dist/**', 'build/**'],
-}
+const oxlintConfigContent = `import { defineConfig } from 'oxlint'
+import { julrPreset } from '@julr/tooling-configs/oxc/lint'
 
-const oxlintConfig = {
-  $schema: './node_modules/oxlint/configuration_schema.json',
-  plugins: ['typescript', 'eslint', 'unicorn', 'import', 'promise'],
-  rules: {
-    'typescript/triple-slash-reference': 'off',
-  },
-}
+export default defineConfig({
+  extends: [julrPreset()],
+})
+`
+
+const oxfmtConfigContent = `import { julrPreset } from '@julr/tooling-configs/oxc/fmt'
+
+export default julrPreset()
+`
 
 const vscodeSettings = {
   'oxc.typeAware': true,
@@ -36,20 +26,20 @@ const vscodeSettings = {
 }
 
 const oxcScripts = {
-  'format': 'oxfmt',
+  'format': 'oxfmt --write .',
   'lint': 'oxlint',
   'lint:fix': 'oxlint --fix',
 }
 
-const oxcPackages = ['oxfmt', 'oxlint', 'oxlint-tsgolint']
+const oxcPackages = ['oxfmt', 'oxlint', '@julr/tooling-configs']
 
 export async function updateOxc(result: PromptResult) {
   if (!result.tools.includes('oxc')) return
 
   const cwd = process.cwd()
 
-  await writeFile(join(cwd, '.oxfmtrc.json'), JSON.stringify(oxfmtConfig, null, 2))
-  await writeFile(join(cwd, '.oxlintrc.json'), JSON.stringify(oxlintConfig, null, 2))
+  await writeFile(join(cwd, 'oxlint.config.ts'), oxlintConfigContent)
+  await writeFile(join(cwd, 'oxfmt.config.ts'), oxfmtConfigContent)
 
   await updateVscodeSettings(cwd)
   await addScriptsToPackageJson(cwd)

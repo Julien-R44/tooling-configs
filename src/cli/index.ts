@@ -4,7 +4,6 @@ import { intro, log, confirm, multiselect, isCancel, cancel } from '@clack/promp
 import { updateOxc } from './update_oxc.js'
 import { updatePkgJson } from './update_pkg.json.js'
 import { updateTsconfig } from './update_tsconfig.js'
-import { updateEslintFiles } from './update_eslint_files.js'
 
 function exit() {
   cancel('Cancelled')
@@ -12,7 +11,7 @@ function exit() {
 }
 
 export interface PromptResult {
-  tools: ('eslint' | 'prettier' | 'tsconfig' | 'oxc')[]
+  tools: ('tsconfig' | 'oxc')[]
 }
 
 async function main() {
@@ -30,8 +29,6 @@ async function main() {
   const tools = await multiselect({
     message: 'Select tools to configure',
     options: [
-      { value: 'eslint', label: 'ESLint' },
-      { value: 'prettier', label: 'Prettier' },
       { value: 'tsconfig', label: 'TypeScript' },
       { value: 'oxc', label: 'OXC (oxlint + oxfmt)' },
     ],
@@ -40,7 +37,6 @@ async function main() {
   if (isCancel(tools)) return exit()
 
   await updatePkgJson({ tools })
-  await updateEslintFiles({ tools })
   await updateTsconfig({ tools })
   await updateOxc({ tools })
 

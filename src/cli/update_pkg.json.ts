@@ -6,12 +6,7 @@ import type { PromptResult } from './index.js'
 import pkgJson from '../../package.json' with { type: 'json' }
 
 export async function updatePkgJson(result: PromptResult) {
-  const needsToolingConfigs =
-    result.tools.includes('eslint') ||
-    result.tools.includes('prettier') ||
-    result.tools.includes('tsconfig')
-
-  if (!needsToolingConfigs) return
+  if (!result.tools.includes('tsconfig')) return
 
   const cwd = process.cwd()
   const pathPackageJSON = join(cwd, 'package.json')
@@ -19,16 +14,6 @@ export async function updatePkgJson(result: PromptResult) {
 
   userPkgJson.devDependencies ??= {}
   userPkgJson.devDependencies['@julr/tooling-configs'] = `^${pkgJson.version}`
-
-  if (result.tools.includes('eslint')) {
-    userPkgJson.devDependencies['eslint'] = pkgJson.devDependencies.eslint
-    delete userPkgJson.eslintConfig
-  }
-
-  if (result.tools.includes('prettier')) {
-    userPkgJson.devDependencies['prettier'] = pkgJson.devDependencies.prettier
-    userPkgJson.prettier = '@julr/tooling-configs/prettier'
-  }
 
   await writeFile(pathPackageJSON, JSON.stringify(userPkgJson, null, 2))
 
