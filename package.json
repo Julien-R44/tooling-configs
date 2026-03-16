@@ -10,6 +10,10 @@
   ],
   "license": "MIT",
   "author": "Julien Ripouteau <julien@ripouteau.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julr/tooling-configs"
+  },
   "bin": "./dist/cli/index.mjs",
   "files": [
     "dist"
