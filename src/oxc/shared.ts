@@ -1,5 +1,5 @@
 export const IGNORE_PATTERNS = [
-  '**/*.adonisjs/**',
+  '**/.adonisjs/**',
   'routeTree.gen.ts',
   'node_modules/**',
   'dist/**',
