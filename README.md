@@ -8,6 +8,7 @@
 ## Features
 
 - Shared presets for [OXC](https://oxc.rs/) tools (oxlint + oxfmt)
+- `anti-slop` Oxlint plugin to discourage boilerplate in AI-generated code
 - TypeScript configuration presets
 - CLI for quick project setup
 
@@ -49,13 +50,58 @@ Options:
 | Option          | Type      | Default | Description                             |
 | --------------- | --------- | ------- | --------------------------------------- |
 | `adonisjs`      | `boolean` | `false` | Enable AdonisJS-specific rules          |
+| `antiSlop`      | `boolean` | `false` | Enable anti-slop rules                  |
 | `perfectionist` | `boolean` | `false` | Enable import sorting via perfectionist |
 
 ```ts
 export default defineConfig({
-  extends: [julrPreset({ adonisjs: true, perfectionist: true })],
+  extends: [julrPreset({ adonisjs: true, antiSlop: true, perfectionist: true })],
 })
 ```
+
+#### Anti-slop rules
+
+Enable all anti-slop rules with `julrPreset({ antiSlop: true })`. They are errors when enabled and can be overridden in your config's `rules` object.
+
+To use the plugin without the preset:
+
+```ts
+import { defineConfig } from 'oxlint'
+
+export default defineConfig({
+  jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
+  rules: {
+    'anti-slop/prefer-constructor-injection': 'error',
+  },
+})
+```
+
+##### `anti-slop/prefer-constructor-injection`
+
+Prefer `private` or `protected` constructor parameter properties in `@inject()` classes instead of redundant fields and assignments.
+
+Incorrect:
+
+```ts
+@inject()
+class UserService {
+  readonly #repository: UserRepository
+  constructor(repository: UserRepository) {
+    this.#repository = repository
+  }
+}
+```
+
+Correct (`private` is also accepted):
+
+```ts
+@inject()
+class UserService {
+  constructor(protected readonly repository: UserRepository) {}
+}
+```
+
+**Autofix:** uses `protected`, preserves `readonly`, and updates references. Ambiguous conversions are reported without a fix. Converted `#fields` lose runtime privacy.
 
 #### oxfmt
 

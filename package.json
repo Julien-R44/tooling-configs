@@ -22,6 +22,7 @@
   "exports": {
     "./tsconfigs/*": "./dist/tsconfigs/*.json",
     "./oxc/lint": "./dist/oxc/lint.mjs",
+    "./oxc/anti-slop": "./dist/oxc/anti-slop/index.mjs",
     "./oxc/fmt": "./dist/oxc/fmt.mjs"
   },
   "publishConfig": {
@@ -34,12 +35,14 @@
     "build": "tsdown",
     "release": "pnpm build && release-it --ci",
     "typecheck": "tsc --noEmit",
-    "checks": "pnpm typecheck && pnpm lint"
+    "test": "pnpm build && node --test src/oxc/anti-slop/*.test.ts",
+    "checks": "pnpm typecheck && pnpm lint && pnpm test"
   },
   "dependencies": {
     "@adonisjs/eslint-plugin": "^2.2.1",
     "@antfu/install-pkg": "^1.1.0",
     "@clack/prompts": "^1.0.1",
+    "@oxlint/plugins": "^1.86.0",
     "eslint-plugin-perfectionist": "^5.5.0",
     "picocolors": "^1.1.1"
   },
@@ -47,7 +50,7 @@
     "@release-it/conventional-changelog": "^10.0.6",
     "@types/node": "^25.2.3",
     "oxfmt": "^0.40.0",
-    "oxlint": "^1.55.0",
+    "oxlint": "^1.86.0",
     "release-it": "^19.2.4",
     "tsdown": "^0.21.3",
     "typescript": "^5.9.3"

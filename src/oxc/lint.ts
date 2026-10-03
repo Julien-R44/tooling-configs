@@ -5,13 +5,21 @@ import { IGNORE_PATTERNS } from './shared.ts'
 
 interface JulrOxlintConfig {
   adonisjs?: boolean
+  antiSlop?: boolean
   perfectionist?: boolean
+}
+
+function antiSlopPreset() {
+  return defineConfig({
+    jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
+    rules: { 'anti-slop/prefer-constructor-injection': 'error' },
+  })
 }
 
 function adonisjsPreset() {
   return defineConfig({
-    'jsPlugins': ['@adonisjs/eslint-plugin'],
-    'rules': {
+    jsPlugins: ['@adonisjs/eslint-plugin'],
+    rules: {
       '@adonisjs/prefer-lazy-controller-import': 'error',
       '@adonisjs/prefer-lazy-listener-import': 'error',
       'typescript/triple-slash-reference': 'off',
@@ -83,6 +91,7 @@ export function julrPreset(config: JulrOxlintConfig = {}) {
     extends: [
       defaultPreset(),
       config.adonisjs ? adonisjsPreset() : null,
+      config.antiSlop ? antiSlopPreset() : null,
       config.perfectionist ? perfectionistPreset() : null,
     ].filter(Boolean) as OxlintConfig[],
     rules: {},
