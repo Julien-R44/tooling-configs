@@ -12,7 +12,10 @@ interface JulrOxlintConfig {
 function antiSlopPreset() {
   return defineConfig({
     jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
-    rules: { 'anti-slop/prefer-constructor-injection': 'error' },
+    rules: {
+      'anti-slop/expression-complexity': 'error',
+      'anti-slop/prefer-constructor-injection': 'error',
+    },
   })
 }
 

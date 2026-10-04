@@ -73,6 +73,7 @@ import { defineConfig } from 'oxlint'
 export default defineConfig({
   jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
   rules: {
+    'anti-slop/expression-complexity': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
   },
 })
@@ -104,6 +105,16 @@ class UserService {
 ```
 
 **Autofix:** uses `protected`, preserves `readonly`, and updates references. Ambiguous conversions are reported without a fix. Converted `#fields` lose runtime privacy.
+
+##### `anti-slop/expression-complexity`
+
+Limit `&&`, `||`, `??`, and `?:` operators per expression, including `if` conditions. Default: `{ max: 3 }`. Nested functions and calls are analyzed separately. No autofix.
+
+```json
+{ "anti-slop/expression-complexity": ["error", { "max": 2 }] }
+```
+
+With `max: 2`, `a && b && c` passes; `a && b && c && d` is reported.
 
 #### oxfmt
 
