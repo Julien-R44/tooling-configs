@@ -74,6 +74,8 @@ export default defineConfig({
   jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
   rules: {
     'anti-slop/expression-complexity': 'error',
+    'anti-slop/no-em-dash': 'error',
+    'anti-slop/no-jargon': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
   },
 })
@@ -115,6 +117,22 @@ Limit `&&`, `||`, `??`, and `?:` operators per expression, including `if` condit
 ```
 
 With `max: 2`, `a && b && c` passes; `a && b && c && d` is reported.
+
+##### `anti-slop/no-em-dash`
+
+Disallow literal `—` in source text, including strings and comments. Reports once per sentence. Allows `–`, `--`, and escaped `\u2014`. No autofix.
+
+##### `anti-slop/no-jargon`
+
+Disallow inflated words such as `utilize`, `robust`, and `seamless` in comments, including JSDoc. Matches simple inflections; ignores words inside backticks or double quotes. Offers replacement suggestions, not autofixes.
+
+Options: `words` replaces the default list, `extraWords` extends it, `allow` excludes words, and `ignoreJSDoc` skips JSDoc (default: `false`).
+
+```json
+{ "anti-slop/no-jargon": ["error", { "allow": ["robust"], "extraWords": ["blazingly"] }] }
+```
+
+Both rules are adapted from [eslint-plugin-slop](https://github.com/antfu/eslint-plugin-slop) under MIT.
 
 #### oxfmt
 

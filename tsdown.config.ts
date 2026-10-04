@@ -11,7 +11,7 @@ export default defineConfig({
   shims: true,
   clean: true,
   format: ['esm'],
-  copy: ['./src/tsconfigs'],
+  copy: ['./src/tsconfigs', { from: './src/oxc/anti-slop/LICENSE', to: './dist/oxc/anti-slop' }],
   deps: {
     neverBundle: ['oxfmt', 'oxlint'],
   },
