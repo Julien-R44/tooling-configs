@@ -45,6 +45,8 @@ export default defineConfig({
 })
 ```
 
+The base preset enables `no-nested-ternary` as an error. Override it in your config's `rules` object if needed.
+
 Options:
 
 | Option          | Type      | Default | Description                             |

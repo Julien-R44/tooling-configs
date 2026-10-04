@@ -82,7 +82,7 @@ function defaultPreset() {
   return defineConfig({
     ignorePatterns: IGNORE_PATTERNS,
     plugins: ['typescript', 'node', 'eslint', 'oxc', 'react', 'react-perf'],
-    rules: {},
+    rules: { 'no-nested-ternary': 'error' },
   })
 }
 

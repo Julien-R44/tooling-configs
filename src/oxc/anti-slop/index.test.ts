@@ -66,6 +66,26 @@ export default { categories: { correctness: 'off' }, extends: [julrPreset(${opti
     assert.equal(disabled.status, 0, disabled.stdout + disabled.stderr)
     assert.equal(JSON.parse(disabled.stdout).diagnostics.length, 0)
 
+    writeFileSync(fixture, 'export const result = outer ? (inner ? 1 : 2) : 3')
+    const nestedTernary = lint()
+    assert.equal(nestedTernary.status, 1, nestedTernary.stdout + nestedTernary.stderr)
+    const baseDiagnostics = JSON.parse(nestedTernary.stdout).diagnostics
+    assert.equal(baseDiagnostics.length, 1)
+    assert.equal(baseDiagnostics[0].code, 'eslint(no-nested-ternary)')
+    assert.equal(baseDiagnostics[0].severity, 'error')
+
+    writeFileSync(fixture, 'export const result = outer ? 1 : 2')
+    const simpleTernary = lint()
+    assert.equal(simpleTernary.status, 0, simpleTernary.stdout + simpleTernary.stderr)
+    assert.equal(JSON.parse(simpleTernary.stdout).diagnostics.length, 0)
+
+    writeFileSync(fixture, 'export const result = outer ? (inner ? 1 : 2) : 3')
+    configure('{}', "{ 'no-nested-ternary': 'off' }")
+    const baseOverride = lint()
+    assert.equal(baseOverride.status, 0, baseOverride.stdout + baseOverride.stderr)
+    assert.equal(JSON.parse(baseOverride.stdout).diagnostics.length, 0)
+
+    writeFileSync(fixture, code)
     configure('{ antiSlop: true }')
     const enabled = lint()
     assert.equal(enabled.status, 1, enabled.stdout + enabled.stderr)
