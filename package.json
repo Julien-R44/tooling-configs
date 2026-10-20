@@ -1,6 +1,6 @@
 {
   "name": "@julr/tooling-configs",
-  "version": "6.1.2",
+  "version": "6.2.0",
   "description": "Shared tooling configs: TSConfig, OXC (oxlint + oxfmt)",
   "keywords": [
     "oxc",
