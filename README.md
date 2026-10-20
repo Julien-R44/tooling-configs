@@ -74,6 +74,7 @@ export default defineConfig({
   jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
   rules: {
     'anti-slop/expression-complexity': 'error',
+    'anti-slop/multiline-arrow-body': 'error',
     'anti-slop/no-em-dash': 'error',
     'anti-slop/no-jargon': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
@@ -117,6 +118,33 @@ Limit `&&`, `||`, `??`, and `?:` operators per expression, including `if` condit
 ```
 
 With `max: 2`, `a && b && c` passes; `a && b && c && d` is reported.
+
+##### `anti-slop/multiline-arrow-body`
+
+Require braces and an explicit `return` when an arrow expression spans multiple lines, measured from `=>` through the end of its body. Single-line expressions and multiline parameter lists with `=> expression` on one line are allowed.
+
+Incorrect:
+
+```ts
+const load = () =>
+  fetch(url, {
+    signal,
+  })
+```
+
+Correct:
+
+```ts
+const load = () => {
+  return fetch(url, {
+    signal,
+  })
+}
+
+const double = value => value * 2
+```
+
+**Autofix:** adds a block and an explicit return, preserving comments and parentheses. Run oxfmt after `oxlint --fix` to format the result.
 
 ##### `anti-slop/no-em-dash`
 
