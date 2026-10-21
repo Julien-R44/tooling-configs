@@ -75,6 +75,7 @@ export default defineConfig({
   rules: {
     'anti-slop/expression-complexity': 'error',
     'anti-slop/multiline-arrow-body': 'error',
+    'anti-slop/no-await-in-condition': 'error',
     'anti-slop/no-em-dash': 'error',
     'anti-slop/no-jargon': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
@@ -145,6 +146,19 @@ const double = value => value * 2
 ```
 
 **Autofix:** adds a block and an explicit return, preserving comments and parentheses. Run oxfmt after `oxlint --fix` to format the result.
+
+##### `anti-slop/no-await-in-condition`
+
+Disallow `await` in `if` and `else if` conditions, including nested expressions such as `ready && await check()`. Await the result in a named variable before the condition.
+
+```ts
+const ready = await check()
+if (ready) {
+  await run()
+}
+```
+
+Allows `await` in the body, in nested functions, and outside `if` conditions. No autofix, because extracting an `await` can change short-circuit evaluation.
 
 ##### `anti-slop/no-em-dash`
 
