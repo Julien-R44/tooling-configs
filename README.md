@@ -10,22 +10,13 @@
 - Shared presets for [OXC](https://oxc.rs/) tools (oxlint + oxfmt)
 - `anti-slop` Oxlint plugin to discourage boilerplate in AI-generated code
 - TypeScript configuration presets
-- CLI for quick project setup
 
 ## Usage
 
 > [!IMPORTANT]
 > New/updated rules will not be considered as breaking changes. Only API changes will be considered as breaking changes.
 
-### CLI installation
-
-Just run this command in your project root directory:
-
-```bash
-pnpm dlx @julr/tooling-configs@latest
-```
-
-### Manual install
+### Installation
 
 ```bash
 pnpm add -D oxlint oxfmt @julr/tooling-configs

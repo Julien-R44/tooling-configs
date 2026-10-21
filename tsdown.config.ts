@@ -1,12 +1,11 @@
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
-  entry: [
-    './src/cli/index.ts',
-    './src/oxc/lint.ts',
-    './src/oxc/fmt.ts',
-    './src/oxc/anti-slop/index.ts',
-  ],
+  entry: {
+    'oxc/lint': './src/oxc/lint.ts',
+    'oxc/fmt': './src/oxc/fmt.ts',
+    'oxc/anti-slop/index': './src/oxc/anti-slop/index.ts',
+  },
   dts: true,
   shims: true,
   clean: true,
