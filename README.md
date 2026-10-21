@@ -84,6 +84,7 @@ export default defineConfig({
     'anti-slop/no-jargon': 'error',
     'anti-slop/no-multiline-inline-params': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
+    'anti-slop/prefer-logger-err-key': 'error',
   },
 })
 ```
@@ -114,6 +115,30 @@ class UserService {
 ```
 
 **Autofix:** uses `protected`, preserves `readonly`, and updates references. Ambiguous conversions are reported without a fix. Converted `#fields` lose runtime privacy.
+
+##### `anti-slop/prefer-logger-err-key`
+
+Require `err` for error values in the first object argument to Pino and Adonis log methods. The default Pino serializer preserves an error's message and stack under this key.
+
+```ts
+import logger from '@adonisjs/core/services/logger'
+
+try {
+	await run()
+} catch (error) {
+	logger.error({ error }, 'Failed') // Incorrect
+	logger.error({ err: error }, 'Failed') // Correct
+	logger.error(error, 'Failed') // Also allowed
+}
+```
+
+Recognizes the Adonis logger service, default and named Pino factory imports, child loggers, and named `Logger` imports from `pino`, `@adonisjs/logger`, or `@adonisjs/core/logger`. Supports local aliases, typed parameters, and instance fields, including constructor parameter properties.
+
+Checks top-level properties containing catch bindings, built-in error instances, or variables annotated with built-in error types. Strings and error messages are allowed. Applies to `trace`, `debug`, `info`, `warn`, `error`, and `fatal`.
+
+This is a syntax-based check, not TypeScript type analysis. It does not follow cross-file re-exports, unknown factories, HTTP context properties, dynamic keys, object spreads, or custom error subclasses outside catch bindings. Reassigned variables are skipped.
+
+No autofix. The rule assumes Pino's default `err` key and serializers. Disable it for calls that deliberately use a custom `errorKey` or serializer.
 
 ##### `anti-slop/expression-complexity`
 

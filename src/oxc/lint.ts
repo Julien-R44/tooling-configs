@@ -24,6 +24,7 @@ function antiSlopPreset() {
       'anti-slop/no-jargon': 'error',
       'anti-slop/no-multiline-inline-params': 'error',
       'anti-slop/prefer-constructor-injection': 'error',
+      'anti-slop/prefer-logger-err-key': 'error',
     },
   })
 }

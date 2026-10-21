@@ -4,6 +4,7 @@ import { noJargonRule } from './no-jargon.ts'
 import { noEmDashRule } from './no-em-dash.ts'
 import { multilineArrowBodyRule } from './multiline-arrow-body.ts'
 import { noAwaitInConditionRule } from './no-await-in-condition.ts'
+import { preferLoggerErrKeyRule } from './prefer-logger-err-key.ts'
 import { expressionComplexityRule } from './expression-complexity.ts'
 import { noMultilineInlineParamsRule } from './no-multiline-inline-params.ts'
 import { preferConstructorInjectionRule } from './prefer-constructor-injection.ts'
@@ -18,5 +19,6 @@ export default definePlugin({
     'no-jargon': noJargonRule,
     'no-multiline-inline-params': noMultilineInlineParamsRule,
     'prefer-constructor-injection': preferConstructorInjectionRule,
+    'prefer-logger-err-key': preferLoggerErrKeyRule,
   },
 })
