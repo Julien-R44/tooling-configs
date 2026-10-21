@@ -82,6 +82,7 @@ export default defineConfig({
     'anti-slop/no-await-in-condition': 'error',
     'anti-slop/no-em-dash': 'error',
     'anti-slop/no-jargon': 'error',
+    'anti-slop/no-multiline-inline-params': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
   },
 })
@@ -185,6 +186,32 @@ if (ready) {
 ```
 
 Allows `await` in the body, in nested functions, and outside `if` conditions. No autofix, because extracting an `await` can change short-circuit evaluation.
+
+##### `anti-slop/no-multiline-inline-params`
+
+Require a named interface or type alias when a parameter's inline object type spans multiple lines. Applies to direct object type annotations on destructured and named parameters, including functions, methods, constructors, and function signatures.
+
+Incorrect:
+
+```ts
+async function execute({ deliveryId, now }: {
+	deliveryId: string
+	now?: DateTime
+}) {}
+```
+
+Correct:
+
+```ts
+interface ExecuteOptions {
+	deliveryId: string
+	now?: DateTime
+}
+
+async function execute({ deliveryId, now }: ExecuteOptions) {}
+```
+
+Single-line inline object types are allowed, even when the parameter list spans multiple lines. Return types, variable annotations, and named type definitions are unchanged. No autofix, because the type's name and declaration scope require a choice.
 
 ##### `anti-slop/no-em-dash`
 

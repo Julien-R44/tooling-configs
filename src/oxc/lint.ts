@@ -22,6 +22,7 @@ function antiSlopPreset() {
       'anti-slop/no-await-in-condition': 'error',
       'anti-slop/no-em-dash': 'error',
       'anti-slop/no-jargon': 'error',
+      'anti-slop/no-multiline-inline-params': 'error',
       'anti-slop/prefer-constructor-injection': 'error',
     },
   })
