@@ -16,6 +16,8 @@ function antiSlopPreset() {
       { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
     ],
     rules: {
+      'max-depth': ['error', 3],
+      'complexity': ['warn', 10],
       'jsdoc-js/multiline-blocks': ['error', { noSingleLineBlocks: true, singleLineTags: [] }],
       'anti-slop/expression-complexity': 'error',
       'anti-slop/multiline-arrow-body': 'error',
@@ -24,6 +26,8 @@ function antiSlopPreset() {
       'anti-slop/no-jargon': 'error',
       'anti-slop/no-multiline-inline-params': 'error',
       'anti-slop/prefer-constructor-injection': 'error',
+      'anti-slop/prefer-early-return': 'error',
+      'anti-slop/prefer-jsdoc': 'error',
       'anti-slop/prefer-logger-err-key': 'error',
     },
   })

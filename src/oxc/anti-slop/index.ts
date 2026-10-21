@@ -2,6 +2,8 @@ import { definePlugin } from '@oxlint/plugins'
 
 import { noJargonRule } from './no-jargon.ts'
 import { noEmDashRule } from './no-em-dash.ts'
+import { preferJsdocRule } from './prefer-jsdoc.ts'
+import { preferEarlyReturnRule } from './prefer-early-return.ts'
 import { multilineArrowBodyRule } from './multiline-arrow-body.ts'
 import { noAwaitInConditionRule } from './no-await-in-condition.ts'
 import { preferLoggerErrKeyRule } from './prefer-logger-err-key.ts'
@@ -19,6 +21,8 @@ export default definePlugin({
     'no-jargon': noJargonRule,
     'no-multiline-inline-params': noMultilineInlineParamsRule,
     'prefer-constructor-injection': preferConstructorInjectionRule,
+    'prefer-early-return': preferEarlyReturnRule,
+    'prefer-jsdoc': preferJsdocRule,
     'prefer-logger-err-key': preferLoggerErrKeyRule,
   },
 })

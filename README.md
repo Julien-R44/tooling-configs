@@ -63,7 +63,9 @@ export default defineConfig({
 
 #### Anti-slop rules
 
-Enable all anti-slop rules with `julrPreset({ antiSlop: true })`. They are errors when enabled and can be overridden in your config's `rules` object.
+Enable all anti-slop rules with `julrPreset({ antiSlop: true })`. They are errors when enabled, except for `complexity`, which is a warning. Override them in your config's `rules` object.
+
+The preset also enables Oxlint's built-in `max-depth` rule with a limit of 3 and `complexity` with a limit of 10. `max-lines-per-function` stays disabled: function length alone does not justify splitting it. `anti-slop/expression-complexity` separately limits logical and ternary operators within individual expressions.
 
 To use the plugin without the preset:
 
@@ -76,6 +78,8 @@ export default defineConfig({
     { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
   ],
   rules: {
+    'max-depth': ['error', 3],
+    complexity: ['warn', 10],
     'jsdoc-js/multiline-blocks': ['error', { noSingleLineBlocks: true, singleLineTags: [] }],
     'anti-slop/expression-complexity': 'error',
     'anti-slop/multiline-arrow-body': 'error',
@@ -84,6 +88,8 @@ export default defineConfig({
     'anti-slop/no-jargon': 'error',
     'anti-slop/no-multiline-inline-params': 'error',
     'anti-slop/prefer-constructor-injection': 'error',
+    'anti-slop/prefer-early-return': 'error',
+    'anti-slop/prefer-jsdoc': 'error',
     'anti-slop/prefer-logger-err-key': 'error',
   },
 })
@@ -115,6 +121,34 @@ class UserService {
 ```
 
 **Autofix:** uses `protected`, preserves `readonly`, and updates references. Ambiguous conversions are reported without a fix. Converted `#fields` lose runtime privacy.
+
+##### `anti-slop/prefer-early-return`
+
+Prefer a guard clause when the last statement of a function is an `if` without `else` wrapping more than one statement. Earlier statements in the function are allowed. Nested conditionals outside this position are not reported.
+
+```ts
+// Incorrect
+function execute() {
+	if (ready) {
+		update()
+		notify()
+	}
+}
+
+// Correct
+function execute() {
+	if (!ready) return
+
+	update()
+	notify()
+}
+```
+
+Options: `maximumStatements` defaults to `1`. Set it to `0` to report single-statement wrappers too. Empty statements do not count. `checkShortBodies` defaults to `false`; enabling it also prefers conditional wrapping for bodies of one to `maximumStatements` statements after a leading bare-return guard.
+
+**Autofix:** inserts a negated guard and unwraps the body when scope, comments, and multiline literals permit it. Unsafe moves are reported without a fix. Trailing wrapper comments can receive an editor suggestion instead. Run oxfmt after fixing.
+
+Adapted from [`unicorn/prefer-early-return` v76.0.0](https://github.com/sindresorhus/eslint-plugin-unicorn/blob/v76.0.0/docs/rules/prefer-early-return.md) under MIT, without an additional dependency. The port uses local indentation detection and may retain extra condition parentheses.
 
 ##### `anti-slop/prefer-logger-err-key`
 
@@ -176,6 +210,26 @@ const double = value => value * 2
 ```
 
 **Autofix:** adds a block and an explicit return, preserving comments and parentheses. Run oxfmt after `oxlint --fix` to format the result.
+
+##### `anti-slop/prefer-jsdoc`
+
+Convert existing `//` documentation before exported declarations and class, interface, type-literal, or enum members to JSDoc. Does not require comments where none exist, add tags, or affect comments inside function bodies.
+
+```ts
+// Incorrect
+// Fetch a user by ID.
+export function fetchUser(id: string) {}
+
+// Correct
+/**
+ * Fetch a user by ID.
+ */
+export function fetchUser(id: string) {}
+```
+
+**Autofix:** produces multiline JSDoc, even for one-line descriptions, and preserves line endings. Skips directives, license comments, blank-separated file headers, trailing comments, and virtual files. Existing block comments are unchanged. Comments containing `*/` are reported without a fix.
+
+Adapted from [`slop/prefer-jsdoc`](https://github.com/antfu/eslint-plugin-slop/blob/98391afefc5000c0a40dfaf83c647dce479a80ee/src/rules/prefer-jsdoc.md) under MIT. Unlike upstream, this port always emits multiline blocks and checks the full file without Git-inspection options. It works with `jsdoc-js/multiline-blocks` below.
 
 ##### `jsdoc-js/multiline-blocks`
 
