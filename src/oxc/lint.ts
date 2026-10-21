@@ -11,8 +11,12 @@ interface JulrOxlintConfig {
 
 function antiSlopPreset() {
   return defineConfig({
-    jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
+    jsPlugins: [
+      '@julr/tooling-configs/oxc/anti-slop',
+      { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
+    ],
     rules: {
+      'jsdoc-js/multiline-blocks': ['error', { noSingleLineBlocks: true, singleLineTags: [] }],
       'anti-slop/expression-complexity': 'error',
       'anti-slop/multiline-arrow-body': 'error',
       'anti-slop/no-await-in-condition': 'error',

@@ -71,8 +71,12 @@ To use the plugin without the preset:
 import { defineConfig } from 'oxlint'
 
 export default defineConfig({
-  jsPlugins: ['@julr/tooling-configs/oxc/anti-slop'],
+  jsPlugins: [
+    '@julr/tooling-configs/oxc/anti-slop',
+    { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
+  ],
   rules: {
+    'jsdoc-js/multiline-blocks': ['error', { noSingleLineBlocks: true, singleLineTags: [] }],
     'anti-slop/expression-complexity': 'error',
     'anti-slop/multiline-arrow-body': 'error',
     'anti-slop/no-await-in-condition': 'error',
@@ -146,6 +150,28 @@ const double = value => value * 2
 ```
 
 **Autofix:** adds a block and an explicit return, preserving comments and parentheses. Run oxfmt after `oxlint --fix` to format the result.
+
+##### `jsdoc-js/multiline-blocks`
+
+Require multiline JSDoc comments, including `@type` and `@lends`. Leave `/**` and `*/` on separate lines without text. Ordinary `/* ... */` and `// ...` comments are unchanged.
+
+Incorrect:
+
+```ts
+/** Description. */
+```
+
+Correct:
+
+```ts
+/**
+ * Description.
+ */
+```
+
+**Autofix:** converts single-line JSDoc blocks with `oxlint --fix`.
+
+Reuses [`eslint-plugin-jsdoc`'s `multiline-blocks`](https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/multiline-blocks.md), enabled by `antiSlop: true`. The `jsdoc-js` alias avoids a name conflict with Oxlint's built-in `jsdoc` plugin. Override it with the `jsdoc-js/multiline-blocks` rule key.
 
 ##### `anti-slop/no-await-in-condition`
 

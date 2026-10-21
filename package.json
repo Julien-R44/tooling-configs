@@ -43,6 +43,7 @@
     "@antfu/install-pkg": "^2.1.0",
     "@clack/prompts": "^1.8.1",
     "@oxlint/plugins": "^1.86.0",
+    "eslint-plugin-jsdoc": "^65.4.0",
     "eslint-plugin-perfectionist": "^5.12.1",
     "picocolors": "^1.1.1"
   },
